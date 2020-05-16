@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  redis:
+    build: .
+    container_name: awesome-redis
+    expose:
+      - 6379
+    sysctls:
+      - net.core.somaxconn=511
