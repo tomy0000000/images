@@ -30,16 +30,13 @@ RUN apt update
 RUN apt install -y openssl
 
 # Generate dhparam and example ssl certificate
-# RUN openssl dhparam -out dhparam.pem 2048
-# COPY conf/ssl.conf ssl.conf
-# RUN openssl req -x509 -newkey rsa:4096 -sha256 -nodes \
-#     -keyout ssl/example.com.key \
-#     -out ssl/example.com.crt \
-#     -config ssl.conf
-# RUN rm ssl.conf
-COPY tmp/dhparam.pem dhparam.pem
-COPY tmp/example.com.crt ssl/example.com.crt
-COPY tmp/example.com.key ssl/example.com.key
+RUN openssl dhparam -out dhparam.pem 2048
+COPY conf/ssl.conf ssl.conf
+RUN openssl req -x509 -newkey rsa:4096 -sha256 -nodes \
+    -keyout ssl/example.com.key \
+    -out ssl/example.com.crt \
+    -config ssl.conf
+RUN rm ssl.conf
 
 # Run syntax check on configuration test
 RUN nginx -t

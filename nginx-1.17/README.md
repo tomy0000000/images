@@ -1,6 +1,6 @@
 # nginx 1.17
 
-nginx web server, production ready
+nginx web server, http2 + SSL + Security Header + gzip + non-root configured, production ready
 
 ## Information
 
@@ -127,7 +127,6 @@ docker restart awesome-nginx
 ### Test in Browser
 
 * localhost: http://localhost:80
-
 * exmaple.com: https://exmaple.com:443
   * Add an `127.0.0.1 example.com` entry in `/etc/hosts`
   * The certificate is self-signed, which might not be accepted in browser, but if you bypass or explicitly trurt the certificate, it should worked.
@@ -153,22 +152,22 @@ docker restart awesome-nginx
 
 ```bash
 nginx
-├── conf.d
-│   ├── default.conf # Custom default vhost conf
-│   ├── default.conf.backup # Official default vhost conf (as reference, not in used)
-│   ├── example.com.conf # an exmaple conf genereated with site_ssl.conf.template
-│   ├── site.conf.template # an exmaple vhost for http (as reference, not in used)
-│   └── site_ssl.conf.template # an exmaple vhost for https (as reference, not in used)
-├── html
-│   ├── default # content of http://localhost:80 vhost
+├── conf.d # vhost conf
+│   ├── default.conf # Custom default
+│   ├── default.conf.backup # Official default (as reference, not in used)
+│   ├── example.com.conf # genereated with site_ssl.conf.template
+│   ├── site.conf.template # exmaple http conf (as reference, not in used)
+│   └── site_ssl.conf.template # exmaple https conf (as reference, not in used)
+├── html # content directories
+│   ├── default # http://localhost:80
 │   │   ├── 50x.html
 │   │   └── index.html
-│   └── example.com # content of https://exmaple.com:443 vhost
+│   └── example.com # https://exmaple.com:443
 │       ├── 50x.html
 │       └── index.html
 ├── nginx.conf # Custom default server conf
 ├── nginx.conf.backup # Official default server conf (as reference, not in used)
-└── ssl # 
+└── ssl # certificates
     ├── example.com.crt
     └── example.com.key
 ```
@@ -181,5 +180,4 @@ nginx
 
 * [Base Image Reference](https://hub.docker.com/_/nginx)
 * [Tips for Deploying NGINX (Official Image) with Docker](https://www.docker.com/blog/tips-for-deploying-nginx-official-image-with-docker/)
-
 * [NGINX Config](https://www.digitalocean.com/community/tools/nginx)
