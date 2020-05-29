@@ -1,0 +1,6 @@
+version: "3.7"
+
+services:
+  hello-world:
+    build: .
+    container_name: awesome-hello-world

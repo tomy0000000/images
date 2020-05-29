@@ -1,0 +1,185 @@
+# nginx 1.17
+
+nginx web server, production ready
+
+## Information
+
+| Configurations |                 |
+| -------------- | --------------- |
+| Base Image     | `nginx:1.17`    |
+| Container Name | `awesome-nginx` |
+| Volumes        |                 |
+| Network        |                 |
+| Expose Port    | `80`, `443`     |
+
+## Install
+
+### Build (Optional, to generate fresh dhparam)
+
+* Docker Compose
+
+```bash
+docker-compose \
+    --file docker-compose-build.yml \
+    up --detach --build
+```
+
+* Dockerfile
+
+```bash
+docker build --tag tomy0000000/nginx:1.17 .
+```
+
+### Init File Structure (Skip if testing)
+
+```bash
+# Clone existed file structure to host
+mkdir nginx
+docker run --name tmp-nginx -d tomy0000000/nginx:1.17
+docker cp tmp-nginx:/etc/nginx/nginx.conf nginx/nginx.conf
+docker cp tmp-nginx:/etc/nginx/nginx.conf.backup nginx/nginx.conf.backup
+docker cp tmp-nginx:/etc/nginx/conf.d nginx/conf.d
+docker cp tmp-nginx:/etc/nginx/ssl nginx/ssl
+docker cp tmp-nginx:/usr/share/nginx/html nginx/html
+docker rm -f tmp-nginx
+```
+
+### Run Container
+
+* Docker Compose
+
+```bash
+docker-compose up --detach
+```
+
+* Dockerfile (**for testing only**, doesn't bind content directory to host)
+
+```bash
+docker run \
+    --detach \
+    --publish 80:80 \
+    --publish 443:443 \
+    --name awesome-nginx \
+    tomy0000000/nginx:1.17
+```
+
+* Dockerfile
+
+```bash
+docker run \
+    --detach \
+    --publish 80:80 \
+    --publish 443:443 \
+    --volume="$PWD/nginx/nginx.conf:/etc/nginx/nginx.conf:ro" \
+    --volume="$PWD/nginx/conf.d:/etc/nginx/conf.d:ro" \
+    --volume="$PWD/nginx/ssl:/etc/nginx/ssl:ro" \
+    --volume="$PWD/nginx/html:/usr/share/nginx/html:ro" \
+    --name awesome-nginx \
+    tomy0000000/nginx:1.17
+```
+
+## Usage
+
+### Setup Virtual Host
+
+* Generate http1 Virtual Host Configs
+
+```bash
+export DOMAIN=  # Insert your domain name here
+envsubst '${DOMAIN}' < nginx/conf.d/site.conf.template > nginx/conf.d/$DOMAIN.conf
+cp -r nginx/html/default nginx/html/$DOMAIN
+```
+
+* Generate http2+SSL Virtual Host Configs
+
+```bash
+export DOMAIN=  # Insert your domain name here
+envsubst '${DOMAIN}' < nginx/conf.d/site_ssl.conf.template > nginx/conf.d/$DOMAIN.conf
+cp -r nginx/html/default nginx/html/$DOMAIN
+```
+
+### Control nginx
+
+* Access shell of container
+
+```bash
+docker exec -it awesome-nginx bash
+```
+
+* Perform syntax check
+
+```bash
+docker exec -it awesome-nginx nginx -t
+```
+
+* Reload nginx configuration (without downtime)
+
+```bash
+docker kill -s HUP awesome-nginx
+```
+
+* Restart whole container (downtime expected)
+
+```bash
+docker restart awesome-nginx
+```
+
+### Test in Browser
+
+* localhost: http://localhost:80
+
+* exmaple.com: https://exmaple.com:443
+  * Add an `127.0.0.1 example.com` entry in `/etc/hosts`
+  * The certificate is self-signed, which might not be accepted in browser, but if you bypass or explicitly trurt the certificate, it should worked.
+
+## Custom Setting
+
+### Applied
+
+* Modify some file structure for simplicity, see [Runtime](#Runtime).
+* Install OpenSSL and generate dhparam
+* Apply Custom Configurations from [NGINX Config](https://www.digitalocean.com/community/tools/nginx)
+
+### Runtime
+
+* Bind the following files/directories to host machine
+
+| Description                | Container Path        | Host Path          |
+| -------------------------- | --------------------- | ------------------ |
+| server configuration       | /etc/nginx/nginx.conf | ./nginx/nginx.conf |
+| virtual host configuration | /etc/nginx/conf.d     | ./nginx/conf.d     |
+| SSL certificates           | /etc/nginx/ssl        | ./nginx/ssl        |
+| static contents            | /usr/share/nginx/html | ./nginx/html       |
+
+```bash
+nginx
+├── conf.d
+│   ├── default.conf # Custom default vhost conf
+│   ├── default.conf.backup # Official default vhost conf (as reference, not in used)
+│   ├── example.com.conf # an exmaple conf genereated with site_ssl.conf.template
+│   ├── site.conf.template # an exmaple vhost for http (as reference, not in used)
+│   └── site_ssl.conf.template # an exmaple vhost for https (as reference, not in used)
+├── html
+│   ├── default # content of http://localhost:80 vhost
+│   │   ├── 50x.html
+│   │   └── index.html
+│   └── example.com # content of https://exmaple.com:443 vhost
+│       ├── 50x.html
+│       └── index.html
+├── nginx.conf # Custom default server conf
+├── nginx.conf.backup # Official default server conf (as reference, not in used)
+└── ssl # 
+    ├── example.com.crt
+    └── example.com.key
+```
+
+### Host Machine
+
+* (None)
+
+## References
+
+* [Base Image Reference](https://hub.docker.com/_/nginx)
+* [Tips for Deploying NGINX (Official Image) with Docker](https://www.docker.com/blog/tips-for-deploying-nginx-official-image-with-docker/)
+
+* [NGINX Config](https://www.digitalocean.com/community/tools/nginx)

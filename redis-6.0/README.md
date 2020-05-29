@@ -24,8 +24,8 @@ docker-compose up --detach
 
 ```bash
 docker-compose \
-	--file docker-compose-build.yml \
-	up --detach --build
+    --file docker-compose-build.yml \
+    up --detach --build
 ```
 
 * Run with Dockerfile

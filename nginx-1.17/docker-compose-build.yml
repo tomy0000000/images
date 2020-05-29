@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+  nginx:
+    build: .
+    container_name: awesome-nginx
+    expose:
+      - 80
+      - 443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/html:/usr/share/nginx/html:ro
+    restart: always
