@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  php-fpm:
+    build: .
+    container_name: awesome-php-fpm
+    restart: always
+    sysctl:
+      - net.ipv4.ip_unprivileged_port_start=0
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html:ro

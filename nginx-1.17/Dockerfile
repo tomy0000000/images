@@ -8,9 +8,10 @@ EXPOSE 443
 RUN cp nginx.conf nginx.conf.backup
 RUN cp conf.d/default.conf conf.d/default.conf.backup
 
-# Move default htmls to sub-directory
+# Customize content directory
 RUN mkdir /usr/share/nginx/html/default
 RUN mv /usr/share/nginx/html/*.html /usr/share/nginx/html/default
+RUN echo "<?php\nphpinfo();\n?>" >> /usr/share/nginx/html/default/index.php
 
 # Copy custom configurations
 COPY conf/nginx.conf nginx.conf
@@ -37,6 +38,3 @@ RUN openssl req -x509 -newkey rsa:4096 -sha256 -nodes \
     -out ssl/example.com.crt \
     -config ssl.conf
 RUN rm ssl.conf
-
-# Run syntax check on configuration test
-RUN nginx -t

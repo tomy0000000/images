@@ -70,6 +70,7 @@ docker run \
     --detach \
     --publish 80:80 \
     --publish 443:443 \
+    # --link awesome-php-fpm:php-fpm \ # Uncomment this line to connect to php-fpm
     --volume="$PWD/nginx/nginx.conf:/etc/nginx/nginx.conf:ro" \
     --volume="$PWD/nginx/conf.d:/etc/nginx/conf.d:ro" \
     --volume="$PWD/nginx/ssl:/etc/nginx/ssl:ro" \
@@ -98,6 +99,10 @@ envsubst '${DOMAIN}' < nginx/conf.d/site_ssl.conf.template > nginx/conf.d/$DOMAI
 cp -r nginx/html/default nginx/html/$DOMAIN
 ```
 
+### Place Static Files
+
+* Place static files under `./nginx/html`
+
 ### Control nginx
 
 * Access shell of container
@@ -115,7 +120,7 @@ docker exec -it awesome-nginx nginx -t
 * Reload nginx configuration (without downtime)
 
 ```bash
-docker kill -s HUP awesome-nginx
+docker kill --signal HUP awesome-nginx
 ```
 
 * Restart whole container (downtime expected)

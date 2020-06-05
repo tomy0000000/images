@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  nginx:
+    container_name: awesome-nginx
+    image: tomy0000000/nginx:1.17
+    networks:
+      - awesome-network
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ./nginx/html:/usr/share/nginx/html:ro
+  php-fpm:
+    container_name: awesome-php-fpm
+    image: tomy0000000/php-fpm:7.4-nginx
+    networks:
+      awesome-network:
+        aliases:
+          - php-fpm
+    restart: always
+    sysctls:
+      - net.ipv4.ip_unprivileged_port_start=0
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html:ro
+networks:
+  awesome-network:

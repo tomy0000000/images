@@ -3,7 +3,7 @@ This is a [mirror](https://hub.docker.com/u/tomy0000000) repository collecting m
 
 Please read through this main README and the one inside each directory if you were to use any of them.
 
-Unless explicit stated, most of the images are for **development purpose** only, they're supposed to be quick and dirty, and had some security concerns to some extent. Therefore, do not use them in production environment.
+Unless explicitly stated, most images are for **development purpose** only, they're supposed to be quick and dirty, and had some security concerns to some extent. Therefore, do not use them in production environment.
 
 ## Installation
 

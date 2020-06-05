@@ -8,7 +8,7 @@ server {
     root $base/${DOMAIN};
 
     # handle .php
-    # include fastcgi-php.conf;
+    include fastcgi-php.conf;
 
     # Forbid Root Level .file
     location ~ /\.(?!well-known) {
