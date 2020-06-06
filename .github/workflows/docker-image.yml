@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Change to Working Directory
-      run: cd nginx-1.17
+    - working-directory: nginx-1.17
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker.pkg.github.com/tomy0000000/docker-registery/nginx:1.17-$(date +%s)
