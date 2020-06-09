@@ -7,8 +7,7 @@ on:
     branches: [ master ]
 
 env:
-  IMAGE_NAME: docker.pkg.github.com/${{ github.repository }}/nginx
-  IMAGE_VERSION: 1.17
+  IMAGE_NAME: nginx:1.17
 
 jobs:
   build:
@@ -16,12 +15,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build Image
-      run: |
-        IMAGE_NAME=$(echo $IMAGE_NAME | tr '[A-Z]' '[a-z]') # Change all uppercase to lowercase
-        BUILT_IMAGE=$IMAGE_NAME:$IMAGE_VERSION-$(date +%s)
-        docker build . --file Dockerfile --tag $BUILT_IMAGE
+      run: docker build . --file Dockerfile --tag $IMAGE_NAME
       working-directory: nginx-1.17
     - name: Log into registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
     - name: Push image
-      run: docker push $BUILT_IMAGE
+      run: |
+        # Naming
+        IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+        IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')-$(date +%s)
+        echo Push $IMAGE_ID
+        
+        # Push
+        docker tag $IMAGE_NAME $IMAGE_ID
+        docker push $IMAGE_ID
