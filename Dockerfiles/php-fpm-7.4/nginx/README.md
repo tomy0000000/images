@@ -46,7 +46,7 @@ docker-compose up --detach
 
 ```bash
 docker run \
-		--detach \
+    --detach \
     --volume="$PWD/nginx/html:/usr/share/nginx/html:ro" \
     --name awesome-php-fpm \
     --sysctl net.ipv4.ip_unprivileged_port_start=0 \

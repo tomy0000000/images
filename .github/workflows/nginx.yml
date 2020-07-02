@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: nginx
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build Image
       run: docker build . --file Dockerfile --tag $IMAGE_NAME
-      working-directory: nginx-1.17
+      working-directory: Dockerfiles/nginx-1.17
     - name: Log into registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
     - name: Push image
