@@ -18,7 +18,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: 1.17
-          path: ./Dockerfiles/nginx-1.17
+          path: Dockerfiles/nginx-1.17
   github-package:
     runs-on: ubuntu-latest
     steps:
@@ -28,9 +28,9 @@ jobs:
       - name: Build and Push to Github Package
         uses: docker/build-push-action@v1
         with:
-          repository: ${{ env.IMAGE_REPOSITORY }}
+          repository: ${{ env.IMAGE_REPOSITORY }}/${{ github.workflow }}
           username: ${{ github.repository_owner }}
           password: ${{ github.token }}
           registry: docker.pkg.github.com
           tags: 1.17
-          path: ./Dockerfiles/nginx-1.17
+          path: Dockerfiles/nginx-1.17
