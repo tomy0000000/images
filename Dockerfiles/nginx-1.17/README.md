@@ -63,18 +63,18 @@ docker run \
     tomy0000000/nginx:1.17
 ```
 
-* Dockerfile
+* Dockerfile (Uncomment line 5 to connect to php-fpm)
 
 ```bash
 docker run \
     --detach \
     --publish 80:80 \
     --publish 443:443 \
-    # --link awesome-php-fpm:php-fpm \ # Uncomment this line to connect to php-fpm
+    # --link awesome-php-fpm \
     --volume="$PWD/nginx/nginx.conf:/etc/nginx/nginx.conf:ro" \
     --volume="$PWD/nginx/conf.d:/etc/nginx/conf.d:ro" \
     --volume="$PWD/nginx/ssl:/etc/nginx/ssl:ro" \
-    --volume="$PWD/nginx/html:/usr/share/nginx/html:ro" \
+    --volume="$PWD/nginx/html:/usr/share/nginx/html" \
     --name awesome-nginx \
     tomy0000000/nginx:1.17
 ```

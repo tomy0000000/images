@@ -7,8 +7,23 @@ server {
     set $base /usr/share/nginx/html;
     root $base/${DOMAIN};
 
-    # handle .php
-    include fastcgi-php.conf;
+    location / {
+        index index.html;
+        # try_files $uri /index.php?$query_string;
+    }
+    
+    # PHP handler
+    # location ~ \.php$ {
+    #     # 404
+    #     try_files $fastcgi_script_name =404;
+        
+    #     # fastcgi settings
+    #     fastcgi_pass            awesome-php-fpm:9000;
+    #     fastcgi_index           index.php;
+    #     fastcgi_buffers         8 16k;
+    #     fastcgi_buffer_size     32k;
+    #     include fastcgi_params;
+    # }
 
     # Forbid Root Level .file
     location ~ /\.(?!well-known) {

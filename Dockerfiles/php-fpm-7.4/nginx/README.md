@@ -1,12 +1,12 @@
 # PHP-FPM 7.4-nginx
 
-FastCGI implementation for PHP, production ready and compatible with [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/master/nginx-1.17)
+FastCGI implementation for PHP, composer installed, production ready and compatible with [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/master/nginx-1.17)
 
 ## Information
 
 | Configurations |                   |
 | -------------- | ----------------- |
-| Base Image     | `php:7.4-fpm`     |
+| Base Image     | `php-fpm:7.4`     |
 | Container Name | `awesome-php-fpm` |
 | Volumes        |                   |
 | Network        |                   |
@@ -47,7 +47,7 @@ docker-compose up --detach
 ```bash
 docker run \
     --detach \
-    --volume="$PWD/nginx/html:/usr/share/nginx/html:ro" \
+    --volume="$PWD/nginx/html:/usr/share/nginx/html" \
     --name awesome-php-fpm \
     --sysctl net.ipv4.ip_unprivileged_port_start=0 \
     tomy0000000/php-fpm:7.4-nginx
@@ -70,11 +70,12 @@ docker kill --signal USR2 awesome-php-fpm
 
 ### Applied
 
-* Change working directory to compatible with [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/master/nginx-1.17)
+* Install Composer
+* Add GD Extension support
 
 ### Runtime
 
-* Bind content directory to host machine
+* Bind content directory to host machine (to compatible with nginx)
 
 ### Host Machine
 
