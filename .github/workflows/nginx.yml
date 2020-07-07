@@ -10,6 +10,7 @@ jobs:
   docker-hub:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Build and Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
@@ -21,6 +22,7 @@ jobs:
   github-package:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Convert repository name to lowercase
         run: echo ::set-env name=IMAGE_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
       - name: Build and Push to Github Package
