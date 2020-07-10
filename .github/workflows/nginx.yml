@@ -14,7 +14,7 @@ jobs:
       - name: Convert repository name to lowercase
         run: echo ::set-env name=GITHUB_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
       - name: Convert tag to version
-        run: echo ::set-env name=IMAGE_VERSION::$(echo ${{ github.ref }} | sed -e 's,.*/.*-\(.*\),\1,')
+        run: echo ::set-env name=IMAGE_VERSION::$(echo ${{ github.ref }} | cut -d"/" -f3 | cut -d"-" -f2)
       - name: Build and Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
@@ -31,7 +31,7 @@ jobs:
       - name: Convert repository name to lowercase
         run: echo ::set-env name=GITHUB_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
       - name: Convert tag to version
-        run: echo ::set-env name=IMAGE_VERSION::$(echo ${{ github.ref }} | sed -e 's,.*/.*-\(.*\),\1,')
+        run: echo ::set-env name=IMAGE_VERSION::$(echo ${{ github.ref }} | cut -d"/" -f3 | cut -d"-" -f2)
       - name: Build and Push to Github Package
         uses: docker/build-push-action@v1
         with:
