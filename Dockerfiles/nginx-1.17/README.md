@@ -4,6 +4,8 @@ nginx web server, http2 + SSL + Security Header + gzip + non-root configured, pr
 
 ## Information
 
+![](https://github.com/tomy0000000/Docker-Registry/workflows/nginx/badge.svg)
+
 | Configurations |                 |
 | -------------- | --------------- |
 | Base Image     | `nginx:1.17`    |
