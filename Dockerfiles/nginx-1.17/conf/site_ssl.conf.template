@@ -23,6 +23,11 @@ server {
     #     fastcgi_buffers         8 16k;
     #     fastcgi_buffer_size     32k;
     #     include fastcgi_params;
+
+    #     # fastcgi params
+    #     fastcgi_param DOCUMENT_ROOT   $realpath_root;
+    #     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+    #     fastcgi_param PHP_ADMIN_VALUE "open_basedir=$base/:/usr/lib/php/:/tmp/";
     # }
 
     # Forbid Root Level .file

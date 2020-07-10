@@ -1,7 +1,8 @@
 FROM nginx:1.17
 
+LABEL tech.tomy.docker.nginx=""
 LABEL maintainer="Tomy Hsieh @tomy0000000"
-LABEL version="1.1"
+LABEL version="1.2"
 
 WORKDIR /etc/nginx
 EXPOSE 80
@@ -9,7 +10,6 @@ EXPOSE 443
 
 # Backup default configurations
 RUN cp nginx.conf nginx.conf.backup
-RUN cp fastcgi_params fastcgi_params.backup
 RUN cp conf.d/default.conf conf.d/default.conf.backup
 
 # Customize content directory
@@ -19,7 +19,6 @@ RUN echo "<?php\nphpinfo();\n?>" >> /usr/share/nginx/html/default/index.php
 
 # Copy custom configurations
 COPY conf/nginx.conf nginx.conf
-COPY conf/fastcgi_params fastcgi_params
 COPY conf/default.conf conf.d/default.conf
 COPY conf/site.conf.template conf.d/site.conf.template
 COPY conf/site_ssl.conf.template conf.d/site_ssl.conf.template

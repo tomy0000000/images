@@ -1,10 +1,8 @@
 name: nginx
 
-on: push
-
-# on:
-#   push:
-#     paths: Dockerfiles/nginx-1.17/*
+on:
+  push:
+    paths: Dockerfiles/nginx-1.17/*
 
 jobs:
   docker-hub:
