@@ -6,13 +6,14 @@ nginx web server, http2 + SSL + Security Header + gzip + non-root configured, pr
 
 ![](https://github.com/tomy0000000/Docker-Registry/workflows/nginx/badge.svg)
 
-| Configurations |                 |
-| -------------- | --------------- |
-| Base Image     | `nginx:1.17`    |
-| Container Name | `awesome-nginx` |
-| Volumes        |                 |
-| Network        |                 |
-| Expose Port    | `80`, `443`     |
+| Configurations    |                                                              |
+| ----------------- | ------------------------------------------------------------ |
+| Base Image        | `nginx:1.17`                                                 |
+| Container Name    | `awesome-nginx`                                              |
+| Volumes           | `./nginx/nginx.conf` → `/etc/nginx/nginx.conf` (Read-Only)<br/>`./nginx/conf.d` → `/etc/nginx/conf.d` (Read-Only)<br/>`.//nginx/ssl` → `/etc/nginx/ssl` (Read-Only)<br/>`./nginx/html` → `/usr/share/nginx/html` (Read-Only) |
+| Network           |                                                              |
+| Working Directory | `/etc/nginx`                                                 |
+| Expose Port       | `80`, `443`                                                  |
 
 ## Install
 
