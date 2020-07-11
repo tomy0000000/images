@@ -1,0 +1,42 @@
+name: php-fpm-nginx
+
+on:
+  push:
+    paths: Dockerfiles/php-fpm-7.4/nginx/*
+
+jobs:
+  docker-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Convert repository name to lowercase
+        run: echo ::set-env name=GITHUB_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+      - name: Convert tag to version
+        run: echo ::set-env name=IMAGE_VERSION::$(echo ${{ github.ref }} | cut -d"/" -f3 | rev | cut -d"-" -f1 | rev)
+      - name: Build and Push to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          repository: ${{ github.repository_owner }}/${{ github.workflow }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: 7.4-${{ env.IMAGE_VERSION }}
+          path: Dockerfiles/php-fpm-7.4/nginx
+          push: ${{ startsWith(github.ref, 'refs/tags/') }}
+  github-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Convert repository name to lowercase
+        run: echo ::set-env name=GITHUB_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+      - name: Convert tag to version
+        run: echo ::set-env name=IMAGE_VERSION::$(echo ${{ github.ref }} | cut -d"/" -f3 | rev | cut -d"-" -f1 | rev)
+      - name: Build and Push to Github Package
+        uses: docker/build-push-action@v1
+        with:
+          repository: ${{ env.GITHUB_REPOSITORY }}/${{ github.workflow }}
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
+          registry: docker.pkg.github.com
+          tags: 7.4-${{ env.IMAGE_VERSION }}
+          path: Dockerfiles/php-fpm-7.4/nginx
+          push: ${{ startsWith(github.ref, 'refs/tags/') }}

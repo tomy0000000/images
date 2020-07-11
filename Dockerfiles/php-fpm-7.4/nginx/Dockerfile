@@ -1,5 +1,6 @@
 FROM php:7.4-fpm
 
+LABEL tech.tomy.docker.php-fpm=""
 LABEL maintainer="Tomy Hsieh @tomy0000000"
 LABEL version="1.1"
 
