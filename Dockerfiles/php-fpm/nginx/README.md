@@ -6,7 +6,7 @@ FastCGI implementation for PHP, composer installed, production ready and compati
 
 | Configurations    |                                                      |
 | ----------------- | ---------------------------------------------------- |
-| Base Image        | `php-fpm:7.4`                                        |
+| Base Image        | `php:7.4-fpm`                                        |
 | Container Name    | `awesome-php-fpm`                                    |
 | Volumes           | `./nginx/html` → `/usr/share/nginx/html` (Read-Only) |
 | Network           |                                                      |

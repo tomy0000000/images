@@ -2,25 +2,33 @@ name: php-fpm-nginx
 
 on:
   push:
-    paths: Dockerfiles/php-fpm-7.4/nginx/*
+    paths:
+      - "Dockerfiles/php-fpm/nginx/**"
+      - "!Dockerfiles/php-fpm/nginx/README.md"
+    branches:
+      - master
+    tags:
+      - php-fpm-*-nginx-*
+
+env:
+  IMAGE_NAME: php-fpm
+  BASE_VERSION: 7.4
 
 jobs:
   docker-hub:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Convert repository name to lowercase
-        run: echo ::set-env name=GITHUB_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
       - name: Convert tag to version
-        run: echo ::set-env name=IMAGE_VERSION::$(echo ${{ github.ref }} | cut -d"/" -f3 | rev | cut -d"-" -f1 | rev)
+        run: echo ::set-env name=IMAGE_TAG::$(echo "${{ github.ref }}" | cut -d"/" -f3 | sed -En "s/^${{ env.IMAGE_NAME }}-(.*)/\1/p")
       - name: Build and Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
-          repository: ${{ github.repository_owner }}/${{ github.workflow }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          tags: 7.4-${{ env.IMAGE_VERSION }}
-          path: Dockerfiles/php-fpm-7.4/nginx
+          tags: ${{ env.IMAGE_TAG }}
+          path: Dockerfiles/${{ env.IMAGE_NAME }}/nginx
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
   github-package:
     runs-on: ubuntu-latest
@@ -29,14 +37,14 @@ jobs:
       - name: Convert repository name to lowercase
         run: echo ::set-env name=GITHUB_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
       - name: Convert tag to version
-        run: echo ::set-env name=IMAGE_VERSION::$(echo ${{ github.ref }} | cut -d"/" -f3 | rev | cut -d"-" -f1 | rev)
+        run: echo ::set-env name=IMAGE_TAG::$(echo "${{ github.ref }}" | cut -d"/" -f3 | sed -En "s/^${{ env.IMAGE_NAME }}-(.*)/\1/p")
       - name: Build and Push to Github Package
         uses: docker/build-push-action@v1
         with:
-          repository: ${{ env.GITHUB_REPOSITORY }}/${{ github.workflow }}
+          repository: ${{ env.GITHUB_REPOSITORY }}/${{ env.IMAGE_NAME }}
           username: ${{ github.repository_owner }}
           password: ${{ github.token }}
           registry: docker.pkg.github.com
-          tags: 7.4-${{ env.IMAGE_VERSION }}
-          path: Dockerfiles/php-fpm-7.4/nginx
+          tags: ${{ env.IMAGE_TAG }}
+          path: Dockerfiles/${{ env.IMAGE_NAME }}/nginx
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
