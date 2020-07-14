@@ -4,13 +4,14 @@ Development-Ready Redis, passwordless.
 
 ## Information
 
-| Configurations |                 |
-| -------------- | --------------- |
-| Base Image     | `redis:6.0`     |
-| Container Name | `awesome-redis` |
-| Volumes        |                 |
-| Network        |                 |
-| Expose Port    | `6379`          |
+| Configurations    |                        |
+| ----------------- | ---------------------- |
+| Base Image        | `redis:6.0`            |
+| Container Name    | `awesome-redis`        |
+| Volumes           |                        |
+| Network           |                        |
+| Working Directory | `/usr/local/etc/redis` |
+| Expose Port       | `6379`                 |
 
 ## Install
 
