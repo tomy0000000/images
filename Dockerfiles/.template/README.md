@@ -4,13 +4,14 @@ description
 
 ## Information
 
-| Configurations |                       |
-| -------------- | --------------------- |
-| Base Image     | `hello-world`         |
-| Container Name | `awesome-hello-world` |
-| Volumes        |                       |
-| Network        |                       |
-| Expose Port    |                       |
+| Configurations    |                       |
+| ----------------- | --------------------- |
+| Base Image        | `hello-world:latest`  |
+| Container Name    | `awesome-hello-world` |
+| Volumes           |                       |
+| Network           |                       |
+| Working Directory | `/`                   |
+| Expose Port       | `80`                  |
 
 ## Install
 
@@ -23,9 +24,7 @@ docker-compose up --detach
 * Run with Docker Compose built from source
 
 ```bash
-docker-compose \
-    --file docker-compose-build.yml \
-    up --detach --build
+docker-compose up --detach --build
 ```
 
 * Run with Dockerfile
