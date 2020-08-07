@@ -7,9 +7,9 @@ Unless explicitly stated, most images are for **development purpose** only, they
 
 ## Installation
 
-All image (service) comes in both two format, `Dockerfile` and `Docker Compose`.
+Most image (service) comes in two format, `Dockerfile` and `Docker Compose`.
 
-Generally, Docker Compose is widely suggested, but is subject to order of install guide given in each README.
+Generally, Docker Compose is designed to used for daemonized services, whereas Dockerfile is designed to run as a development runtime. Consult each README for detailed usage.
 
 ## Custom Setting
 
@@ -26,4 +26,3 @@ The following chart indicate which type of settings is handled using different a
 \**Runtime settings is not handled in Dockerfile, but can be handle using command given in README*
 
 If not specified, settings is required by default. Therefore, if your installation method doesn't handle correctly, unexpected results might happened.
-
