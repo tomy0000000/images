@@ -10,7 +10,7 @@ nginx web server, http2 + SSL + Security Header + gzip + non-root configured, pr
 | ----------------- | ------------------------------------------------------------ |
 | Base Image        | `nginx:1.17`                                                 |
 | Container Name    | `awesome-nginx`                                              |
-| Volumes           | `./nginx/nginx.conf` → `/etc/nginx/nginx.conf` (Read-Only)<br/>`./nginx/conf.d` → `/etc/nginx/conf.d` (Read-Only)<br/>`.//nginx/ssl` → `/etc/nginx/ssl` (Read-Only)<br/>`./nginx/html` → `/usr/share/nginx/html` (Read-Only) |
+| Volumes           | `./nginx/nginx.conf` → `/etc/nginx/nginx.conf` (Read-Only)<br/>`./nginx/conf.d` → `/etc/nginx/conf.d` (Read-Only)<br/>`./nginx/ssl` → `/etc/nginx/ssl` (Read-Only)<br/>`./nginx/html` → `/usr/share/nginx/html` (Read-Only) |
 | Network           |                                                              |
 | Working Directory | `/etc/nginx`                                                 |
 | Expose Port       | `80`, `443`                                                  |

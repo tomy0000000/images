@@ -3,12 +3,12 @@ name: nginx
 on:
   push:
     paths:
-      - "Dockerfiles/nginx/**"
-      - "!Dockerfiles/nginx/README.md"
+      - "Dockerfiles/nginx/1.17/**"
+      - "!Dockerfiles/nginx/1.17/README.md"
     branches:
       - master
     tags:
-      - nginx-*-*
+      - nginx-1.17-*
 
 env:
   IMAGE_NAME: nginx
@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: ${{ env.IMAGE_TAG }}
-          path: Dockerfiles/${{ env.IMAGE_NAME }}
+          path: Dockerfiles/${{ env.IMAGE_NAME }}/${{ env.BASE_VERSION }}
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
   github-package:
     runs-on: ubuntu-latest
@@ -46,5 +46,5 @@ jobs:
           password: ${{ github.token }}
           registry: docker.pkg.github.com
           tags: ${{ env.IMAGE_TAG }}
-          path: Dockerfiles/${{ env.IMAGE_NAME }}
+          path: Dockerfiles/${{ env.IMAGE_NAME }}/${{ env.BASE_VERSION }}
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
