@@ -9,7 +9,9 @@ Unless explicitly stated, most images are for **development purpose** only, they
 
 Most image (service) comes in two format, `Dockerfile` and `Docker Compose`.
 
-Generally, Docker Compose is designed to used for daemonized services, whereas Dockerfile is designed to run as a development runtime. Consult each README for detailed usage.
+Generally, Dockerfile is designed as a simple development runtime. Whereas Docker Compose is designed to managed / visualized complicated configuration, in addition, `restart=always` flag enables the container to daemonized as services.
+
+Consult each README for detailed usage.
 
 ## Custom Setting
 

@@ -11,8 +11,8 @@ on:
       - nginx-1.17-*
 
 env:
-  IMAGE_NAME: nginx
-  BASE_VERSION: 1.17
+  IMAGE_NAME: "nginx"
+  BASE_VERSION: "1.17"
 
 jobs:
   docker-hub:

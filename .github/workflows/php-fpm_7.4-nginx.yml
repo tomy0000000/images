@@ -11,8 +11,8 @@ on:
       - php-fpm-7.4-nginx-*
 
 env:
-  IMAGE_NAME: php-fpm
-  BASE_VERSION: 7.4-nginx
+  IMAGE_NAME: "php-fpm"
+  BASE_VERSION: "7.4-nginx"
 
 jobs:
   docker-hub:
