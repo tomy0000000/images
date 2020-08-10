@@ -33,7 +33,7 @@ docker run \
 
 ## Usage
 
-Current working directory will be mount in `home/host-username`, default working directory will be initialized at root (`/`).
+
 
 
 ## Custom Setting
@@ -44,7 +44,7 @@ Current working directory will be mount in `home/host-username`, default working
 
 ### Runtime
 
-* 
+* Bind host's runtime directory to container's home directory
 
 ### Host Machine
 

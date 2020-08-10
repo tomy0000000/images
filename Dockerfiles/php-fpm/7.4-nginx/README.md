@@ -77,6 +77,7 @@ docker kill --signal USR2 awesome-php-fpm
 ### Runtime
 
 * Bind content directory to host machine (to compatible with nginx)
+* Disable privileged port pretection for arbitrary user (`net.ipv4.ip_unprivileged_port_start=0`)
 
 ### Host Machine
 
@@ -84,4 +85,4 @@ docker kill --signal USR2 awesome-php-fpm
 
 ## References
 
-* [Base Image Reference](https://hub.docker.com/_/hello-world)
+* [Base Image Reference](https://hub.docker.com/_/php)

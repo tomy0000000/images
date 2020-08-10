@@ -1,4 +1,4 @@
-name: ubuntu xenial
+name: ubuntu
 
 on:
   push:
@@ -11,8 +11,8 @@ on:
       - ubuntu-xenial-*
 
 env:
-  IMAGE_NAME: ubuntu
-  BASE_VERSION: xenial
+  IMAGE_NAME: "ubuntu"
+  BASE_VERSION: "xenial"
 
 jobs:
   docker-hub:
