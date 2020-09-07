@@ -4,6 +4,8 @@ Development-Ready Redis, passwordless.
 
 ## Information
 
+![redis](https://github.com/tomy0000000/Docker-Registry/workflows/redis/badge.svg)
+
 | Configurations    |                        |
 | ----------------- | ---------------------- |
 | Base Image        | `redis:6.0`            |

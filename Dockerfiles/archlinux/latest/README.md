@@ -4,6 +4,8 @@ Simple, Lightweight Linux distribution aimed for flexibility
 
 ## Information
 
+![archlinux](https://github.com/tomy0000000/Docker-Registry/workflows/archlinux/badge.svg)
+
 | Configurations    |                         |
 | ----------------- | ----------------------- |
 | Base Image        | `archlinux:latest`      |

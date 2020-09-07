@@ -4,6 +4,8 @@ FastCGI implementation for PHP, composer installed, production ready and compati
 
 ## Information
 
+![php-fpm-nginx](https://github.com/tomy0000000/Docker-Registry/workflows/php-fpm-nginx/badge.svg)
+
 | Configurations    |                                                      |
 | ----------------- | ---------------------------------------------------- |
 | Base Image        | `php:7.4-fpm`                                        |

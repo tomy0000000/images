@@ -4,6 +4,8 @@ The popular Linux distribution based on Debian, as a development runtime.
 
 ## Information
 
+![ubuntu](https://github.com/tomy0000000/Docker-Registry/workflows/ubuntu/badge.svg)
+
 | Configurations    |                         |
 | ----------------- | ----------------------- |
 | Base Image        | `ubuntu:focal`          |
