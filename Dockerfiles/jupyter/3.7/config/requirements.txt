@@ -1,0 +1,4 @@
+-i https://pypi.org/simple
+jupyter==1.0.0
+jupyter-contrib-nbextensions==0.5.1
+jupyter-nbextensions-configurator==0.4.1
