@@ -4,7 +4,7 @@ Interactive web-based data science development environment, extension ready
 
 ## Information
 
-![jupyter](https://github.com/tomy0000000/Docker-Registry/workflows/jupyter/badge.svg)
+![Jupyter 3.7](https://github.com/tomy0000000/Docker-Registry/workflows/Jupyter%203.7/badge.svg)
 
 | Configurations    |                            |
 | ----------------- | -------------------------- |
