@@ -121,7 +121,7 @@
 
 ## Whether to allow the user to run the notebook as root.
 #  Default: False
-c.NotebookApp.allow_root = True
+# c.NotebookApp.allow_root = False
 
 ## Answer yes to any prompts.
 #  See also: JupyterApp.answer_yes

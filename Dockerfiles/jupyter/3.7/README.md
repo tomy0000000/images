@@ -4,7 +4,7 @@ Interactive web-based data science development environment, extension ready
 
 ## Information
 
-![archlinux](https://github.com/tomy0000000/Docker-Registry/workflows/archlinux/badge.svg)
+![jupyter](https://github.com/tomy0000000/Docker-Registry/workflows/jupyter/badge.svg)
 
 | Configurations    |                            |
 | ----------------- | -------------------------- |
@@ -16,12 +16,6 @@ Interactive web-based data science development environment, extension ready
 | Expose Port       | `8888`                     |
 
 ## Install
-
-* Build the Dockerfile
-
-```bash
-docker build --tag tomy0000000/jupyter .
-```
 
 * Start Container
 
@@ -43,11 +37,15 @@ Access jupyter web interface from http://localhost:8888
 
 ### Applied
 
-* 
+* Upgrade `pip` to latest version
+* Install community-contributed notebook extensions (0.5.1) and configurator (0.4.1)
+* Bind server ip to `0.0.0.0:8888`
+* Create new user `jupyter` to startup server
 
 ### Runtime
 
-* Bind host's runtime directory to container's home directory
+* Setup password from environment variable `AWESOME_PASSWORD`
+* Bind host's runtime directory to container's data directory
 
 ### Host Machine
 
@@ -56,3 +54,5 @@ Access jupyter web interface from http://localhost:8888
 ## References
 
 * [Base Image Reference](https://hub.docker.com/_/python)
+* [Docs of Jupyter Notebook](https://jupyter-notebook.readthedocs.io/en/stable)
+* [Docs of Jupyter Notebook Extensions](https://jupyter-contrib-nbextensions.readthedocs.io/en/latest)
