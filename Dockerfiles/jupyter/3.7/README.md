@@ -22,7 +22,7 @@ Interactive web-based data science development environment, extension ready
 ```bash
 docker run --rm \
 		--name "awesome-jupyter" \
-		--env "AWESOME_PASSWORD=your-awesome-password" \
+		--env "AWESOME_PASSWORD=$AWESOME_PASSWORD" \
 		--publish "8888:8888" \
 		--volume "$PWD:/home/jupyter/data" \
 		tomy0000000/jupyter:3.7-1.0

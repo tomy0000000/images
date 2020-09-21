@@ -4,7 +4,7 @@ The popular Linux distribution based on Debian, as a development runtime.
 
 ## Information
 
-![ubuntu](https://github.com/tomy0000000/Docker-Registry/workflows/ubuntu/badge.svg)
+![ubuntu](https://github.com/tomy0000000/Docker-Registry/workflows/Ubuntu%20Xenial/badge.svg)
 
 | Configurations    |                         |
 | ----------------- | ----------------------- |
@@ -17,21 +17,32 @@ The popular Linux distribution based on Debian, as a development runtime.
 
 ## Install
 
-* Build the Dockerfile
-
-```bash
-docker build --tag tomy0000000/ubuntu:xenial .
-```
-
-* Start Container
+* Run a temporary playground container (remove on `exit`)
 
 ```bash
 docker run \
 		-it --rm \
-		--name="some-ubuntu" \
+		--name="awesome-ubuntu" \
+		--env="AWESOME_USERNAME=$USER" \
+		--env="AWESOME_PASSWORD=$AWESOME_PASSWORD" \
 		--volume="$PWD:/home/$USER" \
-		tomy0000000/ubuntu:xenial bash
+		tomy0000000/ubuntu:xenial
 ```
+
+* Run a detached container with SSH server
+
+```bash
+docker run \
+		-it --rm \
+		--name="awesome-ubuntu" \
+		--env="AWESOME_USERNAME=$USER" \
+		--env="AWESOME_PASSWORD=$AWESOME_PASSWORD" \
+		--publish "220:22" \
+		--volume="$PWD:/home/$USER" \
+		tomy0000000/ubuntu:xenial
+```
+
+
 
 ## Usage
 
