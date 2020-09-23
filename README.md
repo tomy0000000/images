@@ -11,6 +11,14 @@ Most image (service) comes in two format, `Dockerfile` and `Docker Compose`.
 
 Generally, Dockerfile is designed as a simple development runtime. Whereas Docker Compose is designed to managed / visualized complicated configuration, in addition, `restart=always` flag enables the container to daemonized as services.
 
+Many of the dockerfile make use of the `AWESOME_PASSWORD` environment variable, for shell password in linux distributions, or admin password in databases. Adding the following line in your `.bashrc`, `.zshrc`, `config.fish`, or other login source config can help speed up the process using images from this repo.
+
+```bash
+# Please don't blindly copy, type your own password
+# or generate one with `openssl rand -base64 48`
+export AWESOME_PASSWORD="8TlZNbT1HENkIkdnzFry+KbOYWVl/uwY207bRIgpOO6/qqV+8qtP9EHbfDUl0ZyF"
+```
+
 Consult each README for detailed usage.
 
 ## Custom Setting
