@@ -15,8 +15,10 @@ RUN sed -i "s/#   Password/Password/g" /etc/ssh/ssh_config
 # Change default shell to zsh
 RUN chsh -s $(which zsh)
 
-# Install Oh My Zsh
+# Install & Setup Oh My Zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN cp -r /root/.oh-my-zsh /etc/skel/
+COPY config/zshrc /etc/skel/.zshrc
 
 # Copy Init script
 COPY init.sh /root/init.sh
