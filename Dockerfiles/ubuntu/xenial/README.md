@@ -6,14 +6,14 @@ The popular Linux distribution based on Debian, as a development runtime.
 
 ![ubuntu](https://github.com/tomy0000000/Docker-Registry/workflows/Ubuntu%20Xenial/badge.svg)
 
-| Configurations    |                          |
-| ----------------- | ------------------------ |
-| Base Image        | `ubuntu:xenial`          |
-| Container Name    | `awesome-ubuntu`         |
-| Volumes           | `.` → `/home/$USER/host` |
-| Network           |                          |
-| Working Directory | `/`                      |
-| Expose Port       |                          |
+| Configurations    |                                                       |
+| ----------------- | ----------------------------------------------------- |
+| Base Image        | `ubuntu:xenial`                                       |
+| Container Name    | `awesome-ubuntu`                                      |
+| Volumes           | `.` → `/home/$USER/host`                              |
+| Network           |                                                       |
+| Working Directory | `/` for dockerfile<br />`/home/$USER` for login shell |
+| Expose Port       | `22` → `220`                                          |
 
 ## Install
 
