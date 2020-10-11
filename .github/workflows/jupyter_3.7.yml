@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/jupyter/**"
       - "!Dockerfiles/jupyter/3.7/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - jupyter-3.7-*
+      - "jupyter-3.7-*"
 
 env:
   IMAGE_NAME: "jupyter"

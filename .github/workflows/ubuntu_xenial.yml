@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/ubuntu/xenial/**"
       - "!Dockerfiles/ubuntu/xenial/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - ubuntu-xenial-*
+      - "ubuntu-xenial-*"
 
 env:
   IMAGE_NAME: "ubuntu"

@@ -1,4 +1,4 @@
-name: php-fpm-nginx
+name: "PHP-FPM 7.4-nginx"
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/php-fpm/nginx/**"
       - "!Dockerfiles/php-fpm/nginx/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - php-fpm-7.4-nginx-*
+      - "php-fpm-7.4-nginx-*"
 
 env:
   IMAGE_NAME: "php-fpm"

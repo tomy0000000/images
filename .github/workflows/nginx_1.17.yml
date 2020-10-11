@@ -1,4 +1,4 @@
-name: nginx
+name: "nginx 1.17"
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/nginx/1.17/**"
       - "!Dockerfiles/nginx/1.17/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - nginx-1.17-*
+      - "nginx-1.17-*"
 
 env:
   IMAGE_NAME: "nginx"

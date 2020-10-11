@@ -1,4 +1,4 @@
-name: archlinux
+name: "Arch Linux Latest"
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/archlinux/latest/**"
       - "!Dockerfiles/archlinux/latest/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - archlinux-latest-*
+      - "archlinux-latest-*"
 
 env:
   IMAGE_NAME: "archlinux"

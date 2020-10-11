@@ -1,4 +1,4 @@
-name: ubuntu
+name: "Ubuntu Focal"
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/ubuntu/focal/**"
       - "!Dockerfiles/ubuntu/focal/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - ubuntu-focal-*
+      - "ubuntu-focal-*"
 
 env:
   IMAGE_NAME: "ubuntu"

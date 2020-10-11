@@ -1,4 +1,4 @@
-name: redis
+name: "Redis 6.0"
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/redis/**"
       - "!Dockerfiles/redis/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - redis-6.0-*
+      - "redis-6.0-*"
 
 env:
   IMAGE_NAME: "redis"

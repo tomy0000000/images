@@ -1,4 +1,4 @@
-name: ubuntu
+name: "Ubuntu Bionic"
 
 on:
   push:
@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/ubuntu/bionic/**"
       - "!Dockerfiles/ubuntu/bionic/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - ubuntu-bionic-*
+      - "ubuntu-bionic-*"
 
 env:
   IMAGE_NAME: "ubuntu"

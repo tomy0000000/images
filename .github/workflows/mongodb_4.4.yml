@@ -6,9 +6,9 @@ on:
       - "Dockerfiles/mongodb/**"
       - "!Dockerfiles/mongodb/4.4/README.md"
     branches:
-      - master
+      - "master"
     tags:
-      - mongodb-4.4-*
+      - "mongodb-4.4-*"
 
 env:
   IMAGE_NAME: "mongodb"
