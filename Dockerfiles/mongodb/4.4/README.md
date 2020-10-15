@@ -1,6 +1,6 @@
 # MongoDB
 
-Document-based Database
+Document-oriented JSON database.
 
 ## Information
 
@@ -12,7 +12,7 @@ Document-based Database
 | Container Name    | `awesome-mongo`   |
 | Volumes           |                   |
 | Network           |                   |
-| Working Directory |                   |
+| Working Directory | `/`               |
 | Expose Port       | `27017` → `27017` |
 
 ## Install
@@ -31,10 +31,10 @@ docker build --tag tomy0000000/mongodb:4.4-1.0 .
 
 ## Usage
 
-* Run a temporary playground container (remove on exit)
+* Run temporary container for development
 
 ```bash
-docker run --rm --detach \
+docker run --detach \
 		--name="$AWESOME_HOST-mongo" \
 		--env="MONGO_INITDB_ROOT_USERNAME=$AWESOME_USER" \
 		--env="MONGO_INITDB_ROOT_PASSWORD=$AWESOME_PASSWORD" \
@@ -47,11 +47,11 @@ docker run --rm --detach \
 
 ### Applied
 
-* 
+* (None)
 
 ### Runtime
 
-* 
+* (None)
 
 ### Host Machine
 

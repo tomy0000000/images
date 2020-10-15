@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  mongodb:
+    container_name: "${AWESOME_HOST}-mongo"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${AWESOME_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${AWESOME_PASSWORD}"
+    image: "tomy0000000/mongodb:4.4-1.0"
+    ports:
+      - "27017:27017"
+    restart: "always"
+    volumes:
+      # FIXME
+      - "./nginx/html:/usr/share/nginx/html:ro"
