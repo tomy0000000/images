@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create User
-username="${AWESOME_USERNAME:-user}"
+username="${AWESOME_USER:-user}"
 password="${AWESOME_PASSWORD:-password}"
 useradd $username --groups "sudo" --home-dir "/home/$username" --shell $(which zsh)
 echo "$username:$password" | chpasswd

@@ -11,15 +11,30 @@ Most image (service) comes in two format, `Dockerfile` and `Docker Compose`.
 
 Generally, Dockerfile is designed as a simple development runtime. Whereas Docker Compose is designed to managed / visualized complicated configuration, in addition, `restart=always` flag enables the container to daemonized as services.
 
-Many of the dockerfile make use of the `AWESOME_PASSWORD` environment variable, for shell password in linux distributions, or admin password in databases. Adding the following line in your `.bashrc`, `.zshrc`, `config.fish`, or other login source config can help speed up the process using images from this repo.
+Consult each README for detailed usage.
 
-```bash
-# Please don't blindly copy, type your own password
-# or generate one with `openssl rand -base64 48`
-export AWESOME_PASSWORD="8TlZNbT1HENkIkdnzFry+KbOYWVl/uwY207bRIgpOO6/qqV+8qtP9EHbfDUl0ZyF"
+### Awesome Variables
+
+Dockerfiles might use some of the following variables to provide consistent experience.
+
+* `AWESOME_USER`: The username of the service or login shell in the container
+* `AWESOME_PASSWORD`: The password of the service, or the user password in the container
+* `AWESOME_HOST`: The hostname used in the container
+
+#### Declare manually per shell session
+
+```sh
+# password can be generated with `openssl rand -base64 32`
+export AWESOME_USER=$USER
+export AWESOME_PASSWORD="Vb8abtQWOmOF19UPOPXALMWedupIlLcxt12/9tYb5Dc="
+export AWESOME_HOST=$HOST
 ```
 
-Consult each README for detailed usage.
+#### Add to your `.bashrc`, `.zshrc`, `config.fish`
+
+```sh
+echo -e 'export AWESOME_USER=$USER\nexport AWESOME_PASSWORD='$(openssl rand -base64 32)'\nexport AWESOME_HOST=$HOST' >> ~/.zshrc
+```
 
 ## Custom Setting
 
