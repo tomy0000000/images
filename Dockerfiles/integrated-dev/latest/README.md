@@ -38,8 +38,8 @@ docker build --tag tomy0000000/integrated-dev:1.0 .
 docker run -d \
 		--name="${AWESOME_HOST:-awesome}-intdev" \
 		--hostname="${AWESOME_HOST:-awesome}-intdev" \
-		--env="$AWESOME_USER" \
-		--env="$AWESOME_PASSWORD" \
+		--env="AWESOME_USER" \
+		--env="AWESOME_PASSWORD" \
 		--publish "127.0.0.1:220:22" \
 		--publish "127.0.0.1:8080:8080" \
 		--publish "127.0.0.1:8888:8888" \
@@ -70,12 +70,12 @@ docker volume create $AWESOME_VOLUME
 docker run -d \
 		--name="$AWESOME_HOST" \
 		--hostname="$AWESOME_HOST" \
-		--env="$AWESOME_USER" \
-		--env="$AWESOME_PASSWORD" \
-		--publish "8080:8080" \
-		--publish "8888:8888" \
+		--env="AWESOME_USER" \
+		--env="AWESOME_PASSWORD" \
+		--publish="8080:8080" \
+		--publish="8888:8888" \
 		--volume="$AWESOME_VOLUME:/home/$AWESOME_USER" \
-		tomy0000000/integrated-dev:1.0
+		tomy0000000/integrated-dev:latest-1.0
 
 # Create dedicated user on host machine
 sudo useradd \
