@@ -19,7 +19,7 @@ RUN update-alternatives --set python /usr/bin/python3.8
 RUN python -m pip install --upgrade pip
 
 # Install PyTorch
-RUN pip install torch==1.7.0+cu110 -f https://download.pytorch.org/whl/torch_stable.html
+# RUN pip install torch==1.7.0+cu110 -f https://download.pytorch.org/whl/torch_stable.html
 
 # Configure SSH
 RUN sed -i "s/#   Password/Password/g" /etc/ssh/ssh_config
