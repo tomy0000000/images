@@ -2,24 +2,19 @@
 
 A well-packed integrated development runtime.
 
-#### TODOs
-
-* Remove OpenSSH
-* Seperate custom install script
-* Componentlize service as build args
-* Minimize dockerfile with single sciprt
+**⚠️Warning: This Dockerfile is going to DEPRECATED.**
 
 ## Information
 
 ![Integrated Dev Latest](https://github.com/tomy0000000/Docker-Registry/workflows/Integrated%20Dev%20Latest/badge.svg)
 
-| Configurations    |                                                              |
-| ----------------- | ------------------------------------------------------------ |
-| Base Image        | `ubuntu:bionic`                                              |
-| Container Name    | `awesome-intdev`                                             |
-| Volumes           | `.` → `/home/$USER/host`                                     |
-| Network           |                                                              |
-| Working Directory | `/` for dockerfile<br />`/home/$USER` for login shell        |
+| Configurations    |                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| Base Image        | `nvidia/cuda:11.1-base-ubuntu18.04`                                                        |
+| Container Name    | `awesome-intdev`                                                                           |
+| Volumes           | `.` → `/home/$USER/host`                                                                   |
+| Network           |                                                                                            |
+| Working Directory | `/root` for dockerfile<br />`/home/$USER` for login shell                                  |
 | Expose Port       | `22` → `220` (OpenSSH)<br />`8888`→ `8888` (Jupyter Lab)<br />`8080`→ `8080` (Code Server) |
 
 ## Install
@@ -66,7 +61,7 @@ export AWESOME_VOLUME="$AWESOME_HOST"
 # Create volume
 docker volume create $AWESOME_VOLUME
 
-# Spawn contaienr
+# Spawn container
 docker run -d \
 		--name="$AWESOME_HOST" \
 		--hostname="$AWESOME_HOST" \
