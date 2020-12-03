@@ -3,8 +3,8 @@ name: "PyTorch 0.5"
 on:
   push:
     paths:
-      - "Dockerfiles/pytorch/**"
-      - "!Dockerfiles/pytorch/latest/README.md"
+      - "Dockerfiles/pytorch/0.5/**"
+      - "!Dockerfiles/pytorch/0.5/README.md"
     branches:
       - "master"
     tags:
