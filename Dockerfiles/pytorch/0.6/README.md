@@ -32,11 +32,11 @@ A well-packed PyTorch development runtime, CUDA ready.
 
 ```bash
 docker build \
-		--build-arg "UBUNTU_VERSION=18.04" \
-		--build-arg "CUDA_VERSION=11.0" \
-		--build-arg "PYTHON_VERSION=3.8" \
-		--build-arg "PYTORCH_VERSION=1.7.0" \
-		--tag tomy0000000/pytorch:0.6 .
+	--build-arg "UBUNTU_VERSION=18.04" \
+	--build-arg "CUDA_VERSION=11.0" \
+	--build-arg "PYTHON_VERSION=3.8" \
+	--build-arg "PYTORCH_VERSION=1.7.0" \
+	--tag tomy0000000/pytorch:0.6 .
 ```
 
 ## Usage (Beta)
@@ -55,16 +55,16 @@ docker volume create $AWESOME_VOLUME
 
 # Spawn container
 docker run -d \
-		--gpus="all" \
-		--name="$AWESOME_HOST" \
-		--hostname="$AWESOME_HOST" \
-		--env="AWESOME_USER" \
-		--env="AWESOME_PASSWORD" \
-		--publish="localhost:$(shuf -i 0-65535 -n 1):22" \
-		--publish="localhost:$(shuf -i 0-65535 -n 1):8080" \
-		--publish="localhost:$(shuf -i 0-65535 -n 1):8888" \
-		--volume="$AWESOME_VOLUME:/home/$AWESOME_USER" \
-		tomy0000000/pytorch:0.6
+	--gpus="all" \
+	--name="$AWESOME_HOST" \
+	--hostname="$AWESOME_HOST" \
+	--env="AWESOME_USER" \
+	--env="AWESOME_PASSWORD" \
+	--publish="localhost:$(shuf -i 0-65535 -n 1):22" \
+	--publish="localhost:$(shuf -i 0-65535 -n 1):8080" \
+	--publish="localhost:$(shuf -i 0-65535 -n 1):8888" \
+	--volume="$AWESOME_VOLUME:/home/$AWESOME_USER" \
+	tomy0000000/pytorch:0.6
 ```
 
 * Clean up process

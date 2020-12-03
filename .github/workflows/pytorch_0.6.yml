@@ -5,6 +5,7 @@ on:
     paths:
       - "Dockerfiles/pytorch/0.6/**"
       - "!Dockerfiles/pytorch/0.6/README.md"
+      - ".github/workflows/pytorch_0.6.yml"
     branches:
       - "master"
     tags:
