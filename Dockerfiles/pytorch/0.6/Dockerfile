@@ -16,8 +16,6 @@ VOLUME ["/home"]
 RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     curl \
     git \
-    python${PYTHON_VERSION} \
-    python3-pip \
     software-properties-common \
     sudo \
     wget \
@@ -39,6 +37,6 @@ RUN python -m pip install --upgrade pip \
     --find-links https://download.pytorch.org/whl/torch_stable.html
 
 # Place Scripts
-COPY scripts/* .
+COPY scripts/* ./
 
 ENTRYPOINT ["/root/entrypoint.sh"]

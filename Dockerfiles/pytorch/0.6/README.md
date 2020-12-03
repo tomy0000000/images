@@ -60,9 +60,9 @@ docker run -d \
 	--hostname="$AWESOME_HOST" \
 	--env="AWESOME_USER" \
 	--env="AWESOME_PASSWORD" \
-	--publish="localhost:$(shuf -i 0-65535 -n 1):22" \
-	--publish="localhost:$(shuf -i 0-65535 -n 1):8080" \
-	--publish="localhost:$(shuf -i 0-65535 -n 1):8888" \
+	--publish="127.0.0.1:$(shuf -i 0-65535 -n 1):22" \
+	--publish="127.0.0.1:$(shuf -i 0-65535 -n 1):8080" \
+	--publish="127.0.0.1:$(shuf -i 0-65535 -n 1):8888" \
 	--volume="$AWESOME_VOLUME:/home/$AWESOME_USER" \
 	tomy0000000/pytorch:0.6
 ```
