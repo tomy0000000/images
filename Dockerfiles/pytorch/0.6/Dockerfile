@@ -26,7 +26,6 @@ RUN add-apt-repository ppa:deadsnakes/ppa \
     && apt update \
     && DEBIAN_FRONTEND=noninteractive apt install -y \
         python${PYTHON_VERSION} \
-        python${PYTHON_VERSION}-dev \
         python${PYTHON_VERSION}-distutils \
     && update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 \
     && update-alternatives --config python \
@@ -36,15 +35,7 @@ RUN add-apt-repository ppa:deadsnakes/ppa \
 # Place Scripts
 COPY scripts/* ./
 
-# Install PyTorch (e.g. torch==1.7.0+cu110)
+# Install PyTorch
 RUN ./pytorch_install.sh
-# RUN pip install torch
-# RUN python -m pip install --upgrade pip \
-#     && pip install torch==${PYTORCH_VERSION}$(if [ $(echo ${CUDA_VERSION} | cut -d"." -f"1-2" | sed "s/\.//g") = "102" ]; then echo ""; else echo +cu$(echo ${CUDA_VERSION} | cut -d"." -f"1-2" | sed "s/\.//g"); fi) \
-#     --find-links https://download.pytorch.org/whl/torch_stable.html
-# RUN python -m pip install --upgrade pip
-# RUN pip install torch==${PYTORCH_VERSION}+cu$(echo $CUDA_VERSION | cut -d'.' -f'1-2' | sed 's/\.//g') \
-#     --find-links https://download.pytorch.org/whl/torch_stable.html
-# RUN ["/bin/bash", "-c", "pip", "install", "torch==${PYTORCH_VERSION}+cu$(echo ${CUDA_VERSION} | cut -d'.' -f'1-2' | sed 's/\.//g')", "--find-links", "https://download.pytorch.org/whl/torch_stable.html"]
 
 ENTRYPOINT ["/root/entrypoint.sh"]
