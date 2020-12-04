@@ -73,11 +73,10 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
       - name: Build and Push to Docker Hub
-        working-directory: Dockerfiles/${{ env.IMAGE_NAME }}/${{ env.BASE_VERSION }}
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./Dockerfile
+          context: Dockerfiles/${{ env.IMAGE_NAME }}/${{ env.BASE_VERSION }}
+          file: Dockerfiles/${{ env.IMAGE_NAME }}/${{ env.BASE_VERSION }}/Dockerfile
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ env.PYTORCH_VERSION }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ env.PYTORCH_VERSION }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
@@ -137,8 +136,8 @@ jobs:
       - name: Build and Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./Dockerfile
+          context: Dockerfiles/${{ env.IMAGE_NAME }}/${{ env.BASE_VERSION }}
+          file: Dockerfiles/${{ env.IMAGE_NAME }}/${{ env.BASE_VERSION }}/Dockerfile
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ env.PYTORCH_VERSION }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ env.PYTORCH_VERSION }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
