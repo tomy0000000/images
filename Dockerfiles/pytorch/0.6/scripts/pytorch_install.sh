@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ ${CUDA_VERSION} = 10.2* ]];
+if [[ ${CUDA_VERSION} = 10.2* ]]
 then
     pip install torch==${PYTORCH_VERSION}
 else

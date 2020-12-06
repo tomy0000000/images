@@ -76,10 +76,10 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
           build-args: |
-            UBUNTU_VERSION=${{ matrix.ubuntu }}
+            PYTORCH_VERSION=${{ matrix.pytorch }}
             CUDA_VERSION=${{ matrix.cuda }}
             PYTHON_VERSION=${{ matrix.python }}
-            PYTORCH_VERSION=${{ matrix.pytorch }}
+            UBUNTU_VERSION=${{ matrix.ubuntu }}
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
   build-and-push-140:
     runs-on: ubuntu-latest
@@ -122,10 +122,10 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
           build-args: |
-            UBUNTU_VERSION=${{ matrix.ubuntu }}
+            PYTORCH_VERSION=${{ matrix.pytorch }}
             CUDA_VERSION=${{ matrix.cuda }}
             PYTHON_VERSION=${{ matrix.python }}
-            PYTORCH_VERSION=${{ matrix.pytorch }}
+            UBUNTU_VERSION=${{ matrix.ubuntu }}
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
   build-and-push-160:
     runs-on: ubuntu-latest
@@ -168,10 +168,10 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
           build-args: |
-            UBUNTU_VERSION=${{ matrix.ubuntu }}
+            PYTORCH_VERSION=${{ matrix.pytorch }}
             CUDA_VERSION=${{ matrix.cuda }}
             PYTHON_VERSION=${{ matrix.python }}
-            PYTORCH_VERSION=${{ matrix.pytorch }}
+            UBUNTU_VERSION=${{ matrix.ubuntu }}
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
   build-and-push-170:
     runs-on: ubuntu-latest
@@ -183,15 +183,18 @@ jobs:
         python: ["3.6", "3.7", "3.8"]
         ubuntu: ["16.04", "18.04"]
         include:
-          - ubuntu: "20.04"
+          - pytorch: "1.7.0"
             cuda: "11.0"
             python: "3.6"
-          - ubuntu: "20.04"
+            ubuntu: "20.04"
+          - pytorch: "1.7.0"
             cuda: "11.0"
             python: "3.7"
-          - ubuntu: "20.04"
+            ubuntu: "20.04"
+          - pytorch: "1.7.0"
             cuda: "11.0"
             python: "3.8"
+            ubuntu: "20.04"
     steps:
       - uses: actions/checkout@v2
       - name: Convert repository name to lowercase
@@ -224,10 +227,10 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}-${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
           build-args: |
-            UBUNTU_VERSION=${{ matrix.ubuntu }}
+            PYTORCH_VERSION=${{ matrix.pytorch }}
             CUDA_VERSION=${{ matrix.cuda }}
             PYTHON_VERSION=${{ matrix.python }}
-            PYTORCH_VERSION=${{ matrix.pytorch }}
+            UBUNTU_VERSION=${{ matrix.ubuntu }}
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
   # # 2FA enabled is not supported yet, fix this someday
   # update-docker-hub-readme:

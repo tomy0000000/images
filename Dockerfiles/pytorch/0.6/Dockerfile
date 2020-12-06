@@ -21,19 +21,11 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Python from deadsnakes
-RUN add-apt-repository ppa:deadsnakes/ppa \
-    && apt update \
-    && DEBIAN_FRONTEND=noninteractive apt install -y \
-        python${PYTHON_VERSION} \
-        python$(echo ${PYTHON_VERSION} | sed 's/3.6/3/g')-distutils \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 \
-    && update-alternatives --config python \
-    && update-alternatives --set python /usr/bin/python${PYTHON_VERSION} \
-    && curl https://bootstrap.pypa.io/get-pip.py | sudo -H python
-
 # Place Scripts
 COPY scripts/* ./
+
+# Install Python
+RUN ./python_install.sh
 
 # Install PyTorch
 RUN ./pytorch_install.sh
