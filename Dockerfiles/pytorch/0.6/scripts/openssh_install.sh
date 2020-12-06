@@ -6,3 +6,6 @@ apt install -y openssh-server
 
 # Configure password login
 sed -i "s/#   Password/Password/g" /etc/ssh/ssh_config
+
+# Start Service
+service start ssh
