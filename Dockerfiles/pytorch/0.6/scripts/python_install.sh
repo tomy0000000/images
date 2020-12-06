@@ -15,12 +15,13 @@ else
     add-apt-repository ppa:deadsnakes/ppa
     apt update
     apt install -y python${PYTHON_VERSION}
-    if [ ${UBUNTU_VERSION} == "16.04" ]
-    then
-        apt install -y python3-distutils-extra
-    else
-        apt install -y python${PYTHON_VERSION}-distutils
-    fi
+    # if [ ${UBUNTU_VERSION} == "16.04" ]
+    # then
+    #     apt install -y python3-distutils-extra
+    # else
+    #     apt install -y python${PYTHON_VERSION}-distutils
+    # fi
+    apt install -y python${PYTHON_VERSION}-distutils
     update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1
     update-alternatives --config python
     update-alternatives --set python /usr/bin/python${PYTHON_VERSION}
