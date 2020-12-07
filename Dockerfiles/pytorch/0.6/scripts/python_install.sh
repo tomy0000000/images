@@ -3,33 +3,21 @@ export DEBIAN_FRONTEND=noninteractive
 
 add-apt-repository ppa:deadsnakes/ppa
 apt update
+apt install -y python${PYTHON_VERSION}
 
-if [ ${PYTHON_VERSION} == "3.6" ] && [ ${UBUNTU_VERSION} == "18.04" ]
+if [ ${UBUNTU_VERSION} == "18.04" ] && [ ${PYTHON_VERSION} == "3.6" ]
 then
-    apt install -y \
-        python${PYTHON_VERSION}
-        # python3-distutils
-elif [ ${PYTHON_VERSION} == "3.8" ] && [ ${UBUNTU_VERSION} == "20.04" ]
+    apt install -y python3-distutils
+elif [ ${UBUNTU_VERSION} == "20.04" ] && [ ${PYTHON_VERSION} == "3.8" ]
 then
-    apt install -y \
-        python${PYTHON_VERSION}
-        # python3-distutils
+    apt install -y python3-distutils
 else
-    if [ ${UBUNTU_VERSION} == "16.04" ]
+    if [ ${UBUNTU_VERSION} == "16.04" ] && [ ${PYTHON_VERSION} == "3.8" ]
     then
-        apt install -y \
-            python${PYTHON_VERSION}
-            # python${PYTHON_VERSION}-distutils
-    elif [ ${UBUNTU_VERSION} == "18.04" ]
+        apt install -y python${PYTHON_VERSION}-distutils
+    elif [ ${UBUNTU_VERSION} == "18.04" ] && [ ${PYTHON_VERSION} == "3.8" ]
     then
-        apt install -y \
-            python${PYTHON_VERSION}
-            # python${PYTHON_VERSION}-distutils
-    elif [ ${UBUNTU_VERSION} == "20.04" ]
-    then
-        apt install -y \
-            python${PYTHON_VERSION}
-            # python${PYTHON_VERSION}-distutils
+        apt install -y python${PYTHON_VERSION}-distutils
     fi
     
     update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1
