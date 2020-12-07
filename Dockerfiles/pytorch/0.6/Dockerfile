@@ -25,15 +25,6 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
 COPY scripts/* ./
 
 # Install Python
-# RUN add-apt-repository ppa:deadsnakes/ppa \
-#     && apt update \
-#     && DEBIAN_FRONTEND=noninteractive apt install -y \
-#         python${PYTHON_VERSION} \
-#         python${PYTHON_VERSION}-distutils \
-#     && update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 \
-#     && update-alternatives --config python \
-#     && update-alternatives --set python /usr/bin/python${PYTHON_VERSION} \
-#     && curl https://bootstrap.pypa.io/get-pip.py | sudo -H python
 RUN ./python_install.sh
 
 # Install PyTorch
