@@ -20,6 +20,9 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     sudo \
     wget \
     && rm -rf /var/lib/apt/lists/*
+        
+# Place Scripts
+COPY scripts/* ./
 
 # Install Python
 # RUN add-apt-repository ppa:deadsnakes/ppa \
@@ -32,9 +35,6 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
 #     && update-alternatives --set python /usr/bin/python${PYTHON_VERSION} \
 #     && curl https://bootstrap.pypa.io/get-pip.py | sudo -H python
 RUN ./python_install.sh
-    
-# Place Scripts
-COPY scripts/* ./
 
 # Install PyTorch
 RUN ./pytorch_install.sh
