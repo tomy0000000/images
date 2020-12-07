@@ -7,10 +7,10 @@ apt install -y python${PYTHON_VERSION}
 
 if [ ${UBUNTU_VERSION} == "18.04" ] && [ ${PYTHON_VERSION} == "3.6" ]
 then
-    apt install -y python3-distutils
+    apt install -y python${PYTHON_VERSION}-distutils
 elif [ ${UBUNTU_VERSION} == "20.04" ] && [ ${PYTHON_VERSION} == "3.8" ]
 then
-    apt install -y python3-distutils
+    apt install -y python${PYTHON_VERSION}-distutils
 else
     if [ ${UBUNTU_VERSION} == "16.04" ] && [ ${PYTHON_VERSION} == "3.8" ]
     then
