@@ -9,9 +9,11 @@ A well-packed PyTorch development runtime, CUDA ready.
 - [x] Scriptlize PyTorch Installation
 - [x] Scriptlize [OpenSSH](https://github.com/linuxserver/docker-openssh-server) Installation
 - [x] Apply matrix build
+- [x] Minimize dockerfile with scripts
 - [ ] Optimize volume
+- [ ] Service Healthchecks
+- [ ] Service Handling with systemctl/service/init.d
 - [ ] Change environment variables to [build secret](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information)
-- [ ] Minimize dockerfile with scripts
 
 ## Information
 
@@ -61,8 +63,6 @@ docker run -d \
 	--env="AWESOME_USER" \
 	--env="AWESOME_PASSWORD" \
 	--publish="127.0.0.1:$(shuf -i 0-65535 -n 1):22" \
-	--publish="127.0.0.1:$(shuf -i 0-65535 -n 1):8080" \
-	--publish="127.0.0.1:$(shuf -i 0-65535 -n 1):8888" \
 	--volume="$AWESOME_VOLUME:/home/$AWESOME_USER" \
 	tomy0000000/pytorch:0.6
 ```
