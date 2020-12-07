@@ -9,7 +9,7 @@ apt install -y python${PYTHON_VERSION}
 # Manually install distutils for Python 3.8 or Ubuntu-provided Python
 # 18.04 (bionic): Python 3.6
 # 20.04 (focal): Python 3.8
-if [ [ ${UBUNTU_VERSION} == "18.04" ] && [ ${PYTHON_VERSION} == "3.6" ] ] || [ ${PYTHON_VERSION} == "3.8" ]
+if [[ ( ${UBUNTU_VERSION} == "18.04" && ${PYTHON_VERSION} == "3.6" ) ]] || [[ ${PYTHON_VERSION} == "3.8" ]]
 then
     apt install -y python${PYTHON_VERSION}-distutils
 fi
