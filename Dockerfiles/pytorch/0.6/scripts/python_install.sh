@@ -8,9 +8,17 @@ apt install -y python${PYTHON_VERSION}
 if [ ${UBUNTU_VERSION} == "18.04" ] && [ ${PYTHON_VERSION} == "3.6" ]
 then
     apt install -y python${PYTHON_VERSION}-distutils
+    
+    update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1
+    update-alternatives --config python
+    update-alternatives --set python /usr/bin/python${PYTHON_VERSION}
 elif [ ${UBUNTU_VERSION} == "20.04" ] && [ ${PYTHON_VERSION} == "3.8" ]
 then
     apt install -y python${PYTHON_VERSION}-distutils
+    
+    update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1
+    update-alternatives --config python
+    update-alternatives --set python /usr/bin/python${PYTHON_VERSION}
 else
     if [ ${UBUNTU_VERSION} == "16.04" ] && [ ${PYTHON_VERSION} == "3.8" ]
     then
