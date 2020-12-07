@@ -12,6 +12,7 @@ A well-packed PyTorch development runtime, CUDA ready.
 - [x] Minimize dockerfile with scripts
 - [ ] Optimize volume
 - [ ] Service Healthchecks
+- [ ] Service Handling with systemctl/service/init.d
 - [ ] Change environment variables to [build secret](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information)
 
 ## Information
