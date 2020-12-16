@@ -8,4 +8,4 @@ apt install -y openssh-server
 sed -i "s/#   Password/Password/g" /etc/ssh/ssh_config
 
 # Start Service
-service start ssh
+service ssh start
