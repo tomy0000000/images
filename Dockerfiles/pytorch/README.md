@@ -2,31 +2,18 @@
 
 A well-packed PyTorch development runtime, CUDA ready.
 
-#### V1 Draft
-
-- [x] Dynamically choose base image
-- [x] Scriptlize Python Installation
-- [x] Scriptlize PyTorch Installation
-- [x] Scriptlize [OpenSSH](https://github.com/linuxserver/docker-openssh-server) Installation
-- [x] Apply matrix build
-- [x] Minimize dockerfile with scripts
-- [ ] Optimize volume
-- [ ] Service Healthchecks
-- [ ] Service Handling with systemctl/service/init.d
-- [ ] Change environment variables to [build secret](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information)
-
 ## Information
 
-![PyTorch 0.5](https://github.com/tomy0000000/Docker-Registry/workflows/PyTorch%200.6/badge.svg)
+![PyTorch](https://github.com/tomy0000000/Docker-Registry/workflows/PyTorch/badge.svg)
 
-| Configurations    |                                                           |
-| ----------------- | --------------------------------------------------------- |
-| Base Image        | `nvidia/cuda`                                             |
-| Container Name    | `awesome-pytorch`                                         |
-| Volumes           | `.` → `/home/$USER/host`                                  |
-| Network           |                                                           |
-| Publish Port      |                                                           |
-| Working Directory | `/host` for dockerfile<br />`/home/$USER` for login shell |
+| Configurations    |                   |
+| ----------------- | ----------------- |
+| Base Image        | `nvidia/cuda`     |
+| Container Name    | `awesome-pytorch` |
+| Volumes           | `$AWESOME_HOST`   |
+| Network           |                   |
+| Publish Port      |                   |
+| Working Directory | `/root`           |
 
 ## Install
 
@@ -92,6 +79,26 @@ docker volume rm $AWESOME_VOLUME
 ### Host Machine
 
 * (None)
+
+## Known Issue
+
+- [ ] Jupyter and Code Server do not auto restart after container restart
+- [ ] Jupyter root is incorrect
+
+## Draft
+
+- [x] Dynamically choose base image
+- [x] Scriptlize Python Installation
+- [x] Scriptlize PyTorch Installation
+- [x] Scriptlize [OpenSSH](https://github.com/linuxserver/docker-openssh-server) Installation
+- [x] Apply matrix build
+- [x] Minimize dockerfile with scripts
+- [x] Unversioning
+- [ ] Portability - Run ipython in non-detached mode
+- [ ] Optimize volume
+- [ ] Service healthchecks
+- [ ] Service handling with systemctl/service/init.d/supervisord
+- [ ] Change environment variables to [build secret](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information)
 
 ## References
 
