@@ -19,8 +19,8 @@ RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
     software-properties-common \
     sudo \
     wget \
-    && rm -rf /var/lib/apt/lists/*
-        
+    && rm -rf /var/lib/apt/lists
+
 # Place Scripts
 COPY scripts/* ./
 

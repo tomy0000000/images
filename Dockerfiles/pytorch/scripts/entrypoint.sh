@@ -3,7 +3,7 @@
 # Create User
 username="${AWESOME_USER:-user}"
 password="${AWESOME_PASSWORD:-password}"
-useradd $username --groups "root,sudo" --home-dir "/home/$username"
+useradd "$username" --no-user-group --groups "root,sudo" --home-dir "/home/$username"
 echo "$username:$password" | chpasswd
 echo "root:$password" | chpasswd
 cp -r /etc/skel/. "/home/$username"
