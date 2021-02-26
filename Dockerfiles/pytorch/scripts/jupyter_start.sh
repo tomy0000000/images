@@ -1,3 +1,3 @@
 #!/bin/bash
-jupyter lab --ip="*" --allow-root > /var/log/jupyterlab.log 2>&1 &
-echo "Jupyter Lab Installed and Started!"
+sudo -i -u "${AWESOME_USER:-user}" jupyter lab --ip="*" > /var/log/jupyterlab.log 2>&1 &
+echo "Jupyter Lab Started!"

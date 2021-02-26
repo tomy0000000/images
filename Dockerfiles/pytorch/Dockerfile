@@ -1,6 +1,6 @@
 ARG UBUNTU_VERSION="18.04"
 ARG CUDA_VERSION="11.0"
-FROM nvidia/cuda:${CUDA_VERSION}-base-ubuntu${UBUNTU_VERSION}
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn8-devel-ubuntu${UBUNTU_VERSION}
 ARG UBUNTU_VERSION
 ARG CUDA_VERSION
 ARG PYTHON_VERSION="3.8"
@@ -13,7 +13,7 @@ WORKDIR /root
 VOLUME ["/home"]
 
 # Install basic toolchains
-RUN apt update && DEBIAN_FRONTEND=noninteractive apt install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     curl \
     git \
     software-properties-common \

@@ -25,7 +25,7 @@ docker build \
 	--build-arg "CUDA_VERSION=11.0" \
 	--build-arg "PYTHON_VERSION=3.8" \
 	--build-arg "PYTORCH_VERSION=1.7.0" \
-	--tag tomy0000000/pytorch:0.6 .
+	--tag tomy0000000/pytorch .
 ```
 
 ## Usage (Beta)
@@ -45,13 +45,13 @@ docker volume create $AWESOME_VOLUME
 # Spawn container
 docker run -d \
 	--gpus="all" \
-	--name="$AWESOME_HOST" \
-	--hostname="$AWESOME_HOST" \
-	--env="AWESOME_USER" \
-	--env="AWESOME_PASSWORD" \
+	--name="${AWESOME_HOST}" \
+	--hostname="${AWESOME_HOST}" \
+	--env="${AWESOME_USER}" \
+	--env="${AWESOME_PASSWORD}" \
 	--publish="127.0.0.1:$(shuf -i 0-65535 -n 1):22" \
-	--volume="$AWESOME_VOLUME:/home/$AWESOME_USER" \
-	tomy0000000/pytorch:0.6
+	--volume="${AWESOME_VOLUME}:/home/${AWESOME_USER}" \
+	tomy0000000/pytorch
 ```
 
 * Clean up process
@@ -80,24 +80,9 @@ docker volume rm $AWESOME_VOLUME
 
 * (None)
 
-## Known Issue
-
-- [ ] Jupyter and Code Server do not auto restart after container restart
-- [ ] Jupyter root is incorrect
-
 ## Draft
 
-- [x] Dynamically choose base image
-- [x] Scriptlize Python Installation
-- [x] Scriptlize PyTorch Installation
-- [x] Scriptlize [OpenSSH](https://github.com/linuxserver/docker-openssh-server) Installation
-- [x] Apply matrix build
-- [x] Minimize dockerfile with scripts
-- [x] Unversioning
-- [ ] Portability - Run ipython in non-detached mode
-- [ ] Optimize volume
 - [ ] Service healthchecks
-- [ ] Service handling with systemctl/service/init.d/supervisord
 - [ ] Change environment variables to [build secret](https://docs.docker.com/develop/develop-images/build_enhancements/#new-docker-build-secret-information)
 
 ## References
@@ -107,5 +92,6 @@ docker volume rm $AWESOME_VOLUME
 * [CUDA image tag list](https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md)
 * [PyTorch wheels list](https://download.pytorch.org/whl/torch_stable.html)
 * [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html)
+* [JupyterServer](https://jupyter-server.readthedocs.io/en/latest/)
 * [Code Server](https://github.com/cdr/code-server)
 

@@ -4,14 +4,20 @@
 curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
 apt install -y nodejs
 
-# Install Jupyter Lab & widget
-pip install --upgrade jupyterlab ipywidgets
+sudo -i -u "${AWESOME_USER:-user}" bash << EOF
+    # Install Jupyter Lab & widget
+    pip install --upgrade jupyterlab ipywidgets
+    
+    # Install lab extension for ipywidgets
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager
+    
+    # Setup config & password
+    jupyter server --generate-config
+    python -c "from jupyter_server.auth.security import set_password; set_password('${AWESOME_PASSWORD:-password}')"
+EOF
 
-# Install lab extension for ipywidgets
-jupyter labextension install @jupyter-widgets/jupyterlab-manager
-
-# Setup Password
-python -c "import os; from notebook.auth.security import set_password; set_password(os.getenv('AWESOME_PASSWORD', 'password'))"
+# Move startup script directory
+mv jupyter_start.sh init.d/
 
 # Start Service
-./jupyter_start.sh
+init.d/jupyter_start.sh
