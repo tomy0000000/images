@@ -10,6 +10,7 @@ else
 fi
 
 # NVIDIA apex
+pip install --upgrade numpy  # some old version require this
 git clone https://github.com/NVIDIA/apex
 cd apex || exit
 python setup.py install

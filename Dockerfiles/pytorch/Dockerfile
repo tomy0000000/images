@@ -1,12 +1,12 @@
 ARG UBUNTU_VERSION="18.04"
-ARG CUDA_VERSION="11.0"
+ARG CUDA_VERSION="11.0-cudnn8"
 FROM nvidia/cuda:${CUDA_VERSION}-devel-ubuntu${UBUNTU_VERSION}
 ARG UBUNTU_VERSION
 ARG CUDA_VERSION
 ARG PYTHON_VERSION="3.8"
-ARG PYTORCH_VERSION="1.7.0"
+ARG PYTORCH_VERSION="1.7.1"
 
-LABEL tech.tomy.docker.pytorch="0.6"
+LABEL tech.tomy.docker="pytorch"
 LABEL maintainer="Tomy Hsieh @tomy0000000"
 
 WORKDIR /root
