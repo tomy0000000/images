@@ -47,8 +47,8 @@ docker run -d \
 	--gpus="all" \
 	--name="${AWESOME_HOST}" \
 	--hostname="${AWESOME_HOST}" \
-	--env="${AWESOME_USER}" \
-	--env="${AWESOME_PASSWORD}" \
+	--env="AWESOME_USER" \
+	--env="AWESOME_PASSWORD" \
 	--publish="127.0.0.1:$(shuf -i 0-65535 -n 1):22" \
 	--volume="${AWESOME_VOLUME}:/home/${AWESOME_USER}" \
 	tomy0000000/pytorch

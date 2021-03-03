@@ -11,7 +11,7 @@ else
     echo "root:${password}" | chpasswd
     cp -r /etc/skel/. "/home/${username}"
     chown "${username}:${username}" -R "/home/${username}"
-    echo 'export PATH="/usr/local/sbin:${PATH}"' >> "/home/${username}/.bashrc"
+    echo "export PATH=\"/home/${username}/.local/bin:"'${PATH}'"\"" >> "/home/${username}/.bashrc"
 fi
 
 # Start SSH server
