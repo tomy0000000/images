@@ -19,7 +19,7 @@ service ssh start > /dev/null
 
 # Run services
 mkdir "init.d"
-find "init/" -follow -type f -print | sort -V | while read -r f; do
+find "init.d/" -follow -type f -print | sort -V | while read -r f; do
     "$f"
 done
 
