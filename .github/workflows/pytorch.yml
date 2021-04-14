@@ -62,9 +62,9 @@ jobs:
           file: Dockerfiles/${{ env.IMAGE_NAME }}/Dockerfile
           tags:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest
-            # ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
             # push: ${{ startsWith(github.ref, 'refs/tags/') }}
-            push: true
+          push: true
   v1-3-1_1-4-0:
     runs-on: ubuntu-latest
     strategy:
@@ -110,14 +110,14 @@ jobs:
           file: Dockerfiles/${{ env.IMAGE_NAME }}/Dockerfile
           tags:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
-            # ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
           build-args: |
             PYTORCH_VERSION=${{ matrix.pytorch }}
             CUDA_VERSION=${{ matrix.cuda }}
             PYTHON_VERSION=${{ matrix.python }}
             UBUNTU_VERSION=${{ matrix.ubuntu }}
             # push: ${{ startsWith(github.ref, 'refs/tags/') }}
-            push: true
+          push: true
   v1-5-1_1-6-0:
     runs-on: ubuntu-latest
     strategy:
@@ -154,14 +154,14 @@ jobs:
           file: Dockerfiles/${{ env.IMAGE_NAME }}/Dockerfile
           tags:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
-            # ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
           build-args: |
             PYTORCH_VERSION=${{ matrix.pytorch }}
             CUDA_VERSION=${{ matrix.cuda }}
             PYTHON_VERSION=${{ matrix.python }}
             UBUNTU_VERSION=${{ matrix.ubuntu }}
             # push: ${{ startsWith(github.ref, 'refs/tags/') }}
-            push: true
+          push: true
   v1-7-x:
     runs-on: ubuntu-latest
     strategy:
@@ -198,14 +198,14 @@ jobs:
           file: Dockerfiles/${{ env.IMAGE_NAME }}/Dockerfile
           tags:
             ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
-            # ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ matrix.pytorch }}-cu${{ matrix.cuda }}-py${{ matrix.python }}-ubuntu${{ matrix.ubuntu }}
           build-args: |
             PYTORCH_VERSION=${{ matrix.pytorch }}
             CUDA_VERSION=${{ matrix.cuda }}
             PYTHON_VERSION=${{ matrix.python }}
             UBUNTU_VERSION=${{ matrix.ubuntu }}
             # push: ${{ startsWith(github.ref, 'refs/tags/') }}
-            push: true
+          push: true
   # # 2FA enabled is not supported yet, fix this someday
   # update-docker-hub-readme:
   #   runs-on: ubuntu-latest
