@@ -28,15 +28,15 @@ docker build \
 	--tag tomy0000000/pytorch .
 ```
 
-## Usage (Beta)
+## Usage
 
 * Use dedicated user for container
 
 ```bash
 # Information about container
-export AWESOME_USER="tomy0000000" # username inside container
+export AWESOME_USER="username" # username inside container
 export AWESOME_PASSWORD=$(openssl rand -base64 48) # password for services
-export AWESOME_HOST="bubble-pack-plunge" # container name & hostname
+export AWESOME_HOST="hostname" # container name & hostname
 export AWESOME_VOLUME="$AWESOME_HOST"
 
 # Create volume
