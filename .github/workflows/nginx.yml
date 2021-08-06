@@ -1,6 +1,7 @@
 name: "nginx"
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "Dockerfiles/nginx/**"
