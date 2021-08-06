@@ -1,4 +1,4 @@
-# nginx 1.17
+# nginx
 
 nginx web server, http2 + SSL + Security Header + gzip + non-root configured, production ready
 
@@ -15,23 +15,13 @@ nginx web server, http2 + SSL + Security Header + gzip + non-root configured, pr
 | Working Directory | `/etc/nginx`                                                 |
 | Expose Port       | `80`, `443`                                                  |
 
-## Install
-
-### Build (Optional, to generate fresh dhparam)
-
-* Docker Compose
-
-```bash
-docker-compose \
-    --file docker-compose-build.yml \
-    up --detach --build
-```
-
-* Dockerfile
+## Build (Optional, for generating fresh dhparam)
 
 ```bash
 docker build --tag tomy0000000/nginx:1.17 .
 ```
+
+## Usage
 
 ### Init File Structure (Skip if testing)
 
@@ -81,8 +71,6 @@ docker run \
     --name awesome-nginx \
     tomy0000000/nginx:1.17
 ```
-
-## Usage
 
 ### Setup Virtual Host
 
