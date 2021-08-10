@@ -6,6 +6,7 @@ on:
     paths:
       - "Dockerfiles/nginx/**"
       - "!Dockerfiles/nginx/README.md"
+      - ".github/workflows/nginx.yml"
     branches:
       - "master"
     tags:
@@ -15,7 +16,7 @@ env:
   IMAGE_NAME: "nginx"
 
 jobs:
-  docker-hub:
+  latest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
