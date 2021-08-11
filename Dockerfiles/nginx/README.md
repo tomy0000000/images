@@ -53,7 +53,7 @@ docker run \
     --publish 80:80 \
     --publish 443:443 \
     --name awesome-nginx \
-    tomy0000000/nginx:1.17
+    tomy0000000/nginx
 ```
 
 * Dockerfile (Uncomment line 5 to connect to php-fpm)
