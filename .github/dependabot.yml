@@ -15,4 +15,4 @@ updates:
       prefix: "🧹 chore: "
     reviewers:
       - "tomy0000000"
-    target-branch: "*"
+    target-branch: "nginx"

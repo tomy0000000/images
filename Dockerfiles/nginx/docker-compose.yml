@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   nginx:
+    build: .
     container_name: awesome-nginx
     image: tomy0000000/nginx
     ports:
