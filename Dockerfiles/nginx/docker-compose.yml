@@ -9,10 +9,15 @@ services:
       - 80:80
       - 443:443
     restart: always
+    networks:
+      - proxy_bridge
     volumes:
       - conf:/etc/nginx/conf.d:ro
       - ssl:/etc/nginx/ssl:ro
       - content:/usr/share/nginx/html:ro
+
+networks:
+  proxy_bridge:
 
 volumes:
   conf:
