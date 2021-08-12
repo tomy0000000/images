@@ -1,11 +1,6 @@
 name: "nginx"
 
 on:
-  workflow_dispatch:
-    version:
-      description: "Base image tag/version"
-      required: false
-      default: "latest"
   push:
     paths:
       - "Dockerfiles/nginx/**"
@@ -13,43 +8,71 @@ on:
       - ".github/workflows/nginx.yml"
     branches:
       - "*"
-    tags:
-      - "nginx"
+  workflow_dispatch:
+    tag:
+      description: "Base image tag/version"
+      required: false
+      default: "latest"
 
 jobs:
-  latest:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setting base image tag
-        run: echo "BASE_TAG=$(echo ${{ github.event.inputs.version }})" >> $GITHUB_ENV
+      - name: Fetch pinned version
+        working-directory: Dockerfiles/${{ github.workflow }}
+        run: echo "PINNED_VERSION=$(head -n 1 Dockerfile | cut -d':' -f2)" >> $GITHUB_ENV
 
+      # This step is required when pushing image
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
 
       - name: Login to DockerHub
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Login to GitHub Container Registry
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.CR_PAT }}
 
-      - name: Build and push
+      - name: Build and push pinned version
         uses: docker/build-push-action@v2
         with:
           context: Dockerfiles/${{ github.workflow }}
           file: Dockerfiles/${{ github.workflow }}/Dockerfile
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}:latest
-            ghcr.io/${{ github.repository_owner }}/${{ github.workflow }}:latest
-          push: ${{ startsWith(github.ref, 'refs/tags/') }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}:${{ env.PINNED_VERSION }}
+            ghcr.io/${{ github.repository_owner }}/${{ github.workflow }}:${{ env.PINNED_VERSION }}
+          push: true
+
+      - name: Build and push latest or custom version
+        uses: docker/build-push-action@v2
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        with:
+          context: Dockerfiles/${{ github.workflow }}
+          file: Dockerfiles/${{ github.workflow }}/custom.Dockerfile
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}:${{ github.event.inputs.tag }}
+            ghcr.io/${{ github.repository_owner }}/${{ github.workflow }}:${{ github.event.inputs.tag }}
+          build-args: |
+            BASE_IMAGE_TAG=${{ github.event.inputs.tag }}
+          push: true
+
+  update-docker-hub-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Update repository description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}
+          readme-filepath: Dockerfiles/${{ github.workflow }}/README.md
