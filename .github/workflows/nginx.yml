@@ -16,6 +16,7 @@ on:
 
 jobs:
   build-and-push:
+    name: Build and push image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -65,6 +66,7 @@ jobs:
           push: true
 
   update-docker-hub-readme:
+    name: Update Docker Hub README
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
