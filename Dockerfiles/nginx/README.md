@@ -8,9 +8,9 @@ nginx web server, http2 + SSL + Security Header + gzip + non-root configured, pr
 
 | Configurations    |                                                              |
 | ----------------- | ------------------------------------------------------------ |
-| Base Image        | `nginx:1.17`                                                 |
+| Base Image        | `nginx` (Version is dynamically updated by Dependabot)       |
 | Container Name    | `awesome-nginx`                                              |
-| Volumes           | `./nginx/nginx.conf` → `/etc/nginx/nginx.conf` (Read-Only)<br/>`./nginx/conf.d` → `/etc/nginx/conf.d` (Read-Only)<br/>`./nginx/ssl` → `/etc/nginx/ssl` (Read-Only)<br/>`./nginx/html` → `/usr/share/nginx/html` (Read-Only) |
+| Volumes           | `./nginx/conf.d` → `/etc/nginx/conf.d` (Read-Only)<br/>`./nginx/ssl` → `/etc/nginx/ssl` (Read-Only)<br/>`./nginx/html` → `/usr/share/nginx/html` (Read-Only) |
 | Network           |                                                              |
 | Working Directory | `/etc/nginx`                                                 |
 | Expose Port       | `80`, `443`                                                  |
@@ -53,7 +53,7 @@ docker run \
     --publish 80:80 \
     --publish 443:443 \
     --name awesome-nginx \
-    tomy0000000/nginx:1.17
+    tomy0000000/nginx
 ```
 
 * Dockerfile (Uncomment line 5 to connect to php-fpm)
@@ -77,17 +77,13 @@ docker run \
 * Generate http1 Virtual Host Configs
 
 ```bash
-export DOMAIN=  # Insert your domain name here
-envsubst '${DOMAIN}' < nginx/conf.d/site.conf.template > nginx/conf.d/$DOMAIN.conf
-cp -r nginx/html/default nginx/html/$DOMAIN
+docker exec -it awesome-nginx ./generate_http1_vhost.sh "example.com"
 ```
 
 * Generate http2+SSL Virtual Host Configs
 
 ```bash
-export DOMAIN=  # Insert your domain name here
-envsubst '${DOMAIN}' < nginx/conf.d/site_ssl.conf.template > nginx/conf.d/$DOMAIN.conf
-cp -r nginx/html/default nginx/html/$DOMAIN
+docker exec -it awesome-nginx ./generate_http2_vhost.sh "example.com"
 ```
 
 ### Place Static Files

@@ -1,4 +1,5 @@
-FROM nginx:1.17
+ARG BASE_IMAGE_TAG="latest"
+FROM nginx:${BASE_IMAGE_TAG}
 
 LABEL tech.tomy.docker.nginx=""
 LABEL maintainer="Tomy Hsieh @tomy0000000"
