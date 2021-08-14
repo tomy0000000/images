@@ -5,8 +5,13 @@
 
 version: 2
 updates:
-  - package-ecosystem: "docker" # See documentation for possible values
-    directory: "/Dockerfiles/nginx" # Location of package manifests
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+  - package-ecosystem: "docker"
+    directory: "/Dockerfiles/nginx"
     schedule:
       interval: "daily"
     assignees:
@@ -15,4 +20,3 @@ updates:
       prefix: "🧹 chore: "
     reviewers:
       - "tomy0000000"
-    target-branch: "nginx"

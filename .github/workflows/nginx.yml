@@ -4,15 +4,15 @@ on:
   push:
     paths:
       - "Dockerfiles/nginx/**"
-      - "!Dockerfiles/nginx/README.md"
       - ".github/workflows/nginx.yml"
     branches:
       - "*"
   workflow_dispatch:
-    tag:
-      description: "Base image tag/version"
-      required: false
-      default: "latest"
+    inputs:
+      tag:
+        description: "Base image tag/version"
+        required: false
+        default: "latest"
 
 jobs:
   build-and-push:
@@ -67,6 +67,7 @@ jobs:
 
   update-docker-hub-readme:
     name: Update Docker Hub README
+    if: ${{ github.event_name == 'push' && github.event_path == format('Dockerfiles/{0}/README.md', github.workflow) }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
