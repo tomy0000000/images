@@ -8,27 +8,13 @@ server {
     root $base/${DOMAIN};
 
     location / {
-        index index.html;
-        # try_files $uri /index.php?$query_string;
+        proxy_set_header    Host               $http_host;
+        proxy_set_header    X-Real-IP          $remote_addr;
+        proxy_set_header    X-Forwarded-For    $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto  $scheme;
+        proxy_redirect      off;
+        proxy_pass          ${PROXY_LOCATION};
     }
-    
-    # PHP handler
-    # location ~ \.php$ {
-    #     # 404
-    #     try_files $fastcgi_script_name =404;
-        
-    #     # fastcgi settings
-    #     fastcgi_pass            awesome-php-fpm:9000;
-    #     fastcgi_index           index.php;
-    #     fastcgi_buffers         8 16k;
-    #     fastcgi_buffer_size     32k;
-    #     include fastcgi_params;
-
-    #     # fastcgi params
-    #     fastcgi_param DOCUMENT_ROOT   $realpath_root;
-    #     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-    #     fastcgi_param PHP_ADMIN_VALUE "open_basedir=$base/:/usr/lib/php/:/tmp/";
-    # }
 
     # Forbid Root Level .file
     location ~ /\.(?!well-known) {
@@ -59,7 +45,7 @@ server {
         expires 7d;
         access_log off;
     }
-    
+
 }
 
 server {

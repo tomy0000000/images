@@ -1,0 +1,77 @@
+server {
+
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    server_name ${DOMAIN};
+    set $base /usr/share/nginx/html;
+    root $base/${DOMAIN};
+
+    location / {
+        proxy_set_header    Host               $http_host;
+        proxy_set_header    X-Real-IP          $remote_addr;
+        proxy_set_header    X-Forwarded-For    $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto  $scheme;
+        proxy_redirect      off;
+        proxy_pass          ${PROXY_LOCATION};
+    }
+
+    # Forbid Root Level .file
+    location ~ /\.(?!well-known) {
+        deny all;
+    }
+
+    # favicon.ico
+    location = /favicon.ico {
+        log_not_found off;
+        access_log off;
+    }
+    
+    # robots.txt
+    location = /robots.txt {
+        log_not_found off;
+        access_log off;
+    }
+    
+    # assets, media
+    location ~* \.(?:css(\.map)?|js(\.map)?|jpe?g|png|gif|ico|cur|heic|webp|tiff?|mp3|m4a|aac|ogg|midi?|wav|mp4|mov|webm|mpe?g|avi|ogv|flv|wmv)$ {
+        expires 7d;
+        access_log off;
+    }
+    
+    # svg, fonts
+    location ~* \.(?:svgz?|ttf|ttc|otf|eot|woff2?)$ {
+        add_header Access-Control-Allow-Origin "*";
+        expires 7d;
+        access_log off;
+    }
+
+    # SSL Certificates
+    ssl_certificate /etc/nginx/ssl/${DOMAIN}.crt;
+    ssl_certificate_key /etc/nginx/ssl/${DOMAIN}.key;
+
+}
+
+server {
+
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    server_name www.${DOMAIN};
+
+    ssl_certificate /etc/nginx/ssl/${DOMAIN}.crt;
+    ssl_certificate_key /etc/nginx/ssl/${DOMAIN}.key;
+
+    return 301 https://${DOMAIN}$request_uri;
+}
+
+server {
+
+    listen 80;
+    listen [::]:80;
+
+    server_name ${DOMAIN} www.${DOMAIN};
+
+    return 301 https://${DOMAIN}$request_uri;
+    
+}

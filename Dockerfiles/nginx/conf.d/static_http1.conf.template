@@ -3,9 +3,9 @@ server {
     listen 80;
     listen [::]:80;
 
-    server_name localhost;
+    server_name ${DOMAIN};
     set $base /usr/share/nginx/html;
-    root $base/default;
+    root $base/${DOMAIN};
 
     location / {
         index index.html;
@@ -60,4 +60,15 @@ server {
         access_log off;
     }
 
+}
+
+server {
+
+    listen 80;
+    listen [::]:80;
+
+    server_name www.${DOMAIN};
+
+    return 301 http://${DOMAIN}$request_uri;
+    
 }
