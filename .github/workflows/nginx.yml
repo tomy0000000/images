@@ -26,7 +26,13 @@ jobs:
         run: echo "PINNED_VERSION=$(head -n 1 Dockerfile | cut -d':' -f2)" >> $GITHUB_ENV
 
       - name: Fetch custom version
-        run: echo "CUSTOM_VERSION=${${{ github.event.inputs.tag }}:-latest}" >> $GITHUB_ENV
+        run: |
+          VERSION='${{ github.event.inputs.tag }}'
+          if [ "$VERSION" == "" ];then
+            echo "CUSTOM_VERSION=latest" >> $GITHUB_ENV
+          else
+            echo "CUSTOM_VERSION=$VERSION" >> $GITHUB_ENV
+          fi
 
       # This step is required when pushing image
       - name: Set up Docker Buildx
