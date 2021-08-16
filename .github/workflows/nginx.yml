@@ -25,6 +25,9 @@ jobs:
         working-directory: Dockerfiles/${{ github.workflow }}
         run: echo "PINNED_VERSION=$(head -n 1 Dockerfile | cut -d':' -f2)" >> $GITHUB_ENV
 
+      - name: Fetch custom version
+        run: echo "CUSTOM_VERSION=${${{ github.event.inputs.tag }}:-latest}" >> $GITHUB_ENV
+
       # This step is required when pushing image
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -59,10 +62,10 @@ jobs:
           context: Dockerfiles/${{ github.workflow }}
           file: Dockerfiles/${{ github.workflow }}/custom.Dockerfile
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}:${{ github.event.inputs.tag }}
-            ghcr.io/${{ github.repository_owner }}/${{ github.workflow }}:${{ github.event.inputs.tag }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}:${{ env.CUSTOM_VERSION }}
+            ghcr.io/${{ github.repository_owner }}/${{ github.workflow }}:${{ env.CUSTOM_VERSION }}
           build-args: |
-            BASE_IMAGE_TAG=${{ github.event.inputs.tag }}
+            BASE_IMAGE_TAG=${{ env.CUSTOM_VERSION }}
           push: true
 
   update-docker-hub-readme:
