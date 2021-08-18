@@ -6,7 +6,7 @@ on:
       - "Dockerfiles/redis/**"
       - "!Dockerfiles/redis/README.md"
     branches:
-      - "master"
+      - "main"
     tags:
       - "redis-6.0-*"
 

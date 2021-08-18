@@ -6,7 +6,7 @@ on:
       - "Dockerfiles/archlinux/latest/**"
       - "!Dockerfiles/archlinux/latest/README.md"
     branches:
-      - "master"
+      - "main"
     tags:
       - "archlinux-latest-*"
 

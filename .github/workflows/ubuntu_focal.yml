@@ -6,7 +6,7 @@ on:
       - "Dockerfiles/ubuntu/focal/**"
       - "!Dockerfiles/ubuntu/focal/README.md"
     branches:
-      - "master"
+      - "main"
     tags:
       - "ubuntu-focal-*"
 

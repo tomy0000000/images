@@ -1,6 +1,6 @@
 # PHP-FPM 7.4-nginx
 
-FastCGI implementation for PHP, composer installed, production ready and compatible with [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/master/nginx-1.17)
+FastCGI implementation for PHP, composer installed, production ready and compatible with [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/main/nginx-1.17)
 
 ## Information
 
@@ -19,7 +19,7 @@ FastCGI implementation for PHP, composer installed, production ready and compati
 
 ### Build (Optional)
 
-* Docker Compose
+- Docker Compose
 
 ```bash
 docker-compose \
@@ -27,7 +27,7 @@ docker-compose \
     up --detach --build
 ```
 
-* Dockerfile
+- Dockerfile
 
 ```bash
 docker build --tag tomy0000000/php-fpm:7.4-nginx .
@@ -35,17 +35,17 @@ docker build --tag tomy0000000/php-fpm:7.4-nginx .
 
 ### Init File Structure (Skip if testing)
 
-* Follow instructions from [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/master/nginx-1.17#init-file-structure-skip-if-testing)
+- Follow instructions from [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/main/nginx-1.17#init-file-structure-skip-if-testing)
 
 ### Run Container
 
-* Docker Compose
+- Docker Compose
 
 ```bash
 docker-compose up --detach
 ```
 
-* Dockerfile
+- Dockerfile
 
 ```bash
 docker run \
@@ -58,33 +58,32 @@ docker run \
 
 ## Usage
 
-* Follow instructions from [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/master/nginx-1.17#usage)
+- Follow instructions from [tomy0000000/nginx](https://github.com/tomy0000000/Docker-Registery/tree/main/nginx-1.17#usage)
 
 ### Control PHP-FPM
 
-* Reload PHP-FPM
+- Reload PHP-FPM
 
 ```bash
 docker kill --signal USR2 awesome-php-fpm
 ```
 
-
 ## Custom Setting
 
 ### Applied
 
-* Install Composer
-* Add GD Extension support
+- Install Composer
+- Add GD Extension support
 
 ### Runtime
 
-* Bind content directory to host machine (to compatible with nginx)
-* Disable privileged port pretection for arbitrary user (`net.ipv4.ip_unprivileged_port_start=0`)
+- Bind content directory to host machine (to compatible with nginx)
+- Disable privileged port pretection for arbitrary user (`net.ipv4.ip_unprivileged_port_start=0`)
 
 ### Host Machine
 
-* (None)
+- (None)
 
 ## References
 
-* [Base Image Reference](https://hub.docker.com/_/php)
+- [Base Image Reference](https://hub.docker.com/_/php)

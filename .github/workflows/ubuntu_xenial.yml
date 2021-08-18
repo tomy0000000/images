@@ -6,7 +6,7 @@ on:
       - "Dockerfiles/ubuntu/xenial/**"
       - "!Dockerfiles/ubuntu/xenial/README.md"
     branches:
-      - "master"
+      - "main"
     tags:
       - "ubuntu-xenial-*"
 

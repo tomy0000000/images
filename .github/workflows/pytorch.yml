@@ -7,7 +7,7 @@ on:
       - "!Dockerfiles/pytorch/README.md"
       - ".github/workflows/pytorch.yml"
     branches:
-      - "master"
+      - "main"
     tags:
       - "pytorch"
   # workflow_dispatch:

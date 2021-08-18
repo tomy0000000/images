@@ -6,7 +6,7 @@ on:
       - "Dockerfiles/jupyter/**"
       - "!Dockerfiles/jupyter/3.7/README.md"
     branches:
-      - "master"
+      - "main"
     tags:
       - "jupyter-3.7-*"
 

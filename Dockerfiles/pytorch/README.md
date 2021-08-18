@@ -17,7 +17,7 @@ A well-packed PyTorch development runtime, CUDA ready.
 
 ## Install
 
-* Build from source
+- Build from source
 
 ```bash
 docker build \
@@ -30,7 +30,7 @@ docker build \
 
 ## Usage
 
-* Use dedicated user for container
+- Use dedicated user for container
 
 ```bash
 # Information about container
@@ -54,7 +54,7 @@ docker run -d \
 	tomy0000000/pytorch
 ```
 
-* Clean up process
+- Clean up process
 
 ```bash
 # Remove container
@@ -68,17 +68,17 @@ docker volume rm $AWESOME_VOLUME
 
 ### Applied
 
-* Pre-install `curl`, `git`, `sudo`, `wget` from apt
-* Scripts to install OpenSSH Server, JupyterLab, and Code Server
+- Pre-install `curl`, `git`, `sudo`, `wget` from apt
+- Scripts to install OpenSSH Server, JupyterLab, and Code Server
 
 ### Runtime
 
-* Create new user
-* Bind host's runtime directory to container's home directory
+- Create new user
+- Bind host's runtime directory to container's home directory
 
 ### Host Machine
 
-* (None)
+- (None)
 
 ## Draft
 
@@ -87,11 +87,10 @@ docker volume rm $AWESOME_VOLUME
 
 ## References
 
-* [Base Image Reference](https://hub.docker.com/r/nvidia/cuda)
-* [Python deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)
-* [CUDA image tag list](https://gitlab.com/nvidia/container-images/cuda/blob/master/doc/supported-tags.md)
-* [PyTorch wheels list](https://download.pytorch.org/whl/torch_stable.html)
-* [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html)
-* [JupyterServer](https://jupyter-server.readthedocs.io/en/latest/)
-* [Code Server](https://github.com/cdr/code-server)
-
+- [Base Image Reference](https://hub.docker.com/r/nvidia/cuda)
+- [Python deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa)
+- [CUDA image tag list](https://gitlab.com/nvidia/container-images/cuda/blob/main/doc/supported-tags.md)
+- [PyTorch wheels list](https://download.pytorch.org/whl/torch_stable.html)
+- [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html)
+- [JupyterServer](https://jupyter-server.readthedocs.io/en/latest/)
+- [Code Server](https://github.com/cdr/code-server)

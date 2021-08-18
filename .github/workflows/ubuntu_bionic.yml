@@ -6,7 +6,7 @@ on:
       - "Dockerfiles/ubuntu/bionic/**"
       - "!Dockerfiles/ubuntu/bionic/README.md"
     branches:
-      - "master"
+      - "main"
     tags:
       - "ubuntu-bionic-*"
 

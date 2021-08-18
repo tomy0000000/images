@@ -6,7 +6,7 @@ on:
       - "Dockerfiles/php-fpm/nginx/**"
       - "!Dockerfiles/php-fpm/nginx/README.md"
     branches:
-      - "master"
+      - "main"
     tags:
       - "php-fpm-7.4-nginx-*"
 

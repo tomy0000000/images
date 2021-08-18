@@ -6,7 +6,7 @@ on:
       - "Dockerfiles/mongodb/**"
       - "!Dockerfiles/mongodb/4.4/README.md"
     branches:
-      - "master"
+      - "main"
     tags:
       - "mongodb-4.4-*"
 
