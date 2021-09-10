@@ -1,4 +1,4 @@
-FROM nginx:1.21.1
+FROM nginx:1.21.3
 
 LABEL tech.tomy.docker.nginx=""
 LABEL maintainer="Tomy Hsieh @tomy0000000"
