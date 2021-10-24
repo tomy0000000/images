@@ -22,7 +22,7 @@ jobs:
       - name: Convert tag to version
         run: echo ::set-env name=IMAGE_TAG::$(echo "${{ github.ref }}" | cut -d"/" -f3 | sed -En "s/^${{ env.IMAGE_NAME }}-(.*)/\1/p")
       - name: Build and Push to Docker Hub
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2.7.0
         with:
           repository: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           username: ${{ github.repository_owner }}
@@ -39,7 +39,7 @@ jobs:
       - name: Convert tag to version
         run: echo ::set-env name=IMAGE_TAG::$(echo "${{ github.ref }}" | cut -d"/" -f3 | sed -En "s/^${{ env.IMAGE_NAME }}-(.*)/\1/p")
       - name: Build and Push to Github Package
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2.7.0
         with:
           repository: ${{ env.GITHUB_REPOSITORY }}/${{ env.IMAGE_NAME }}
           username: ${{ github.repository_owner }}

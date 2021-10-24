@@ -52,7 +52,7 @@ jobs:
           password: ${{ github.token }}
 
       - name: Build and push pinned version
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2.7.0
         if: ${{ github.event_name != 'workflow_dispatch' }}
         with:
           context: Dockerfiles/${{ github.workflow }}
@@ -63,7 +63,7 @@ jobs:
           push: true
 
       - name: Build and push latest or custom version
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2.7.0
         with:
           context: Dockerfiles/${{ github.workflow }}
           file: Dockerfiles/${{ github.workflow }}/custom.Dockerfile
