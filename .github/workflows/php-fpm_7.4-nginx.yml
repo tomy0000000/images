@@ -24,8 +24,8 @@ jobs:
       - name: Build and Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
-          repository: ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}
-          username: ${{ secrets.DOCKER_USERNAME }}
+          repository: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           tags: ${{ env.IMAGE_TAG }}
           path: Dockerfiles/${{ env.IMAGE_NAME }}/${{ env.BASE_VERSION }}

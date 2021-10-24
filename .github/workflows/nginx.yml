@@ -41,7 +41,7 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Login to GitHub Container Registry
@@ -58,7 +58,7 @@ jobs:
           context: Dockerfiles/${{ github.workflow }}
           file: Dockerfiles/${{ github.workflow }}/Dockerfile
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}:${{ env.PINNED_VERSION }}
+            ${{ github.repository_owner }}/${{ github.workflow }}:${{ env.PINNED_VERSION }}
             ghcr.io/${{ github.repository_owner }}/${{ github.workflow }}:${{ env.PINNED_VERSION }}
           push: true
 
@@ -68,7 +68,7 @@ jobs:
           context: Dockerfiles/${{ github.workflow }}
           file: Dockerfiles/${{ github.workflow }}/custom.Dockerfile
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}:${{ env.CUSTOM_VERSION }}
+            ${{ github.repository_owner }}/${{ github.workflow }}:${{ env.CUSTOM_VERSION }}
             ghcr.io/${{ github.repository_owner }}/${{ github.workflow }}:${{ env.CUSTOM_VERSION }}
           build-args: |
             BASE_IMAGE_TAG=${{ env.CUSTOM_VERSION }}
@@ -84,7 +84,7 @@ jobs:
       - name: Update repository description
         uses: peter-evans/dockerhub-description@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: ${{ secrets.DOCKER_USERNAME }}/${{ github.workflow }}
+          repository: ${{ github.repository_owner }}/${{ github.workflow }}
           readme-filepath: Dockerfiles/${{ github.workflow }}/README.md
