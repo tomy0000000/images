@@ -1,0 +1,7 @@
+services:
+  backup:
+    depends_on:
+      - "postgres"
+    env_file:
+      - ".env"
+    image: "tomy0000000/postgres-backup-dropbox:14"

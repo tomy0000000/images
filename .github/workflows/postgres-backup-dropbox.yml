@@ -1,0 +1,57 @@
+name: "Postgres Backup to Dropbox"
+
+on:
+  push:
+    paths:
+      - ".github/workflows/postgres-backup-dropbox.yml"
+      - "Dockerfiles/postgres-backup-dropbox/**"
+    branches:
+      - "main"
+
+env:
+  IMAGE_NAME: "postgres-backup-dropbox"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_path != 'Dockerfiles/postgres-backup-dropbox/README.md' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        postgres: ["11", "12", "13", "14", "latest"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{major}},value=${{ matrix.postgres }},enable=${{ matrix.postgres != 'latest' }}
+            type=raw,value=latest,enable=${{ matrix.postgres == 'latest' }}
+
+      - name: Build and Push Image
+        uses: tomy0000000/actions/build-push-image@main
+        with:
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  update-docker-hub-readme:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_path == 'Dockerfiles/postgres-backup-dropbox/README.md' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Update repository description
+        uses: peter-evans/dockerhub-description@v2
+        with:
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          readme-filepath: Dockerfiles/${{ env.IMAGE_NAME }}/README.md
