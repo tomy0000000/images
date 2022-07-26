@@ -3,7 +3,6 @@ set -e
 
 # Optional variables
 POSTGRES_BACKUP_DROPBOX_DIR=${POSTGRES_BACKUP_DROPBOX_DIR:-/backup}
-FILENAME="dump_$(date +%d-%m-%Y"_"%H_%M_%S).sql"
 
 # Required variables
 POSTGRES_HOST=${POSTGRES_HOST:-localhost}
@@ -22,6 +21,8 @@ echo "{\"\":{\"personal\":\"${DROPBOX_AUTH_CODE}\"}}" >"${HOME}/.config/dbxcli/a
 chmod 600 "${HOME}/.config/dbxcli/auth.json"
 
 while true; do
+    FILENAME="dump_$(date +%d-%m-%Y"_"%H_%M_%S).sql"
+
     # Dump the database into a file
     pg_dumpall --no-password \
         --host "${POSTGRES_HOST}" \

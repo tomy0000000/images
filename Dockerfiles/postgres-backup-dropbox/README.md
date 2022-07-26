@@ -1,7 +1,7 @@
 # Postgres Backup to Dropbox
 
-![GitHub Action Status](https://github.com/tomy0000000/registry/workflows/postgres-backup-dropbox/badge.svg)
-![Docker Pulls](https://img.shields.io/docker/pulls/tomy0000000/postgres-backup-dropbox?logo=docker)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/tomy0000000/registry/Postgres%20Backup%20to%20Dropbox?logo=Github)](https://github.com/tomy0000000/registry/actions/workflows/postgres-backup-dropbox.yml)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tomy0000000/postgres-backup-dropbox?logo=docker)](https://hub.docker.com/repository/docker/tomy0000000/postgres-backup-dropbox)
 
 Backup a postgres instance to Dropbox with `dbxcli`.
 
