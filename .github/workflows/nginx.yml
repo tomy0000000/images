@@ -82,7 +82,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Update repository description
-        uses: peter-evans/dockerhub-description@v2
+        uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASSWORD }}
