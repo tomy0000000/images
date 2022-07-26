@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
@@ -85,7 +85,7 @@ jobs:
             ubuntu: "18.04"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
@@ -129,7 +129,7 @@ jobs:
         ubuntu: ["16.04", "18.04"]
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
@@ -173,7 +173,7 @@ jobs:
         ubuntu: ["16.04", "18.04"]
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
@@ -217,7 +217,7 @@ jobs:
         ubuntu: ["16.04", "18.04"]
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
@@ -255,7 +255,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   if: ${{ startsWith(github.ref, 'refs/tags/') }}
   #   steps:
-  #     - uses: actions/checkout@v2
+  #     - uses: actions/checkout@v3
   #     - name: Update repository description
   #       uses: peter-evans/dockerhub-description@v2
   #       with:
