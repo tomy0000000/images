@@ -9,30 +9,38 @@ on:
       - "main"
 
 env:
+  TITLE: "Postgres Backup to Dropbox"
+  DESCRIPTION: "Backup a postgres instance to Dropbox with `dbxcli`"
   IMAGE_NAME: "postgres-backup-dropbox"
 
 jobs:
   build:
+    name: "Build"
     runs-on: ubuntu-latest
-    if: ${{ github.event_path != 'Dockerfiles/postgres-backup-dropbox/README.md' }}
     strategy:
       fail-fast: false
       matrix:
         postgres: ["11", "12", "13", "14", "latest"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Docker Meta
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: |
             ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=semver,pattern={{major}},value=${{ matrix.postgres }},enable=${{ matrix.postgres != 'latest' }}
-            type=raw,value=latest,enable=${{ matrix.postgres == 'latest' }}
+            type=raw,value=${{ matrix.postgres }}
+          labels: |
+            maintainer=${{ github.repository_owner }}
+            org.opencontainers.image.title=${{ env.TITLE }}
+            org.opencontainers.image.description=${{ env.DESCRIPTION }}
+            org.opencontainers.image.url=${{ github.repositoryUrl }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
+            org.opencontainers.image.source=${{ github.repositoryUrl }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
+            org.opencontainers.image.version=${{ matrix.postgres }}
 
       - name: Build and Push Image
         uses: tomy0000000/actions/build-push-image@main
@@ -40,18 +48,20 @@ jobs:
           docker_password: ${{ secrets.DOCKER_PASSWORD }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          context: Dockerfiles/${{ env.IMAGE_NAME }}
 
   update-docker-hub-readme:
+    name: "Update Docker Hub README"
     runs-on: ubuntu-latest
-    if: ${{ github.event_path == 'Dockerfiles/postgres-backup-dropbox/README.md' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Update repository description
-        uses: peter-evans/dockerhub-description@v2
+        uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          short-description: ${{ env.DESCRIPTION }}
           readme-filepath: Dockerfiles/${{ env.IMAGE_NAME }}/README.md
