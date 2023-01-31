@@ -18,7 +18,7 @@ jobs:
   docker-hub:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Convert tag to version
         run: echo ::set-env name=IMAGE_TAG::$(echo "${{ github.ref }}" | cut -d"/" -f3 | sed -En "s/^${{ env.IMAGE_NAME }}-(.*)/\1/p")
       - name: Build and Push to Docker Hub
@@ -33,7 +33,7 @@ jobs:
   github-package:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Convert repository name to lowercase
         run: echo ::set-env name=GITHUB_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
       - name: Convert tag to version
