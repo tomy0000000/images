@@ -1,9 +1,8 @@
-# Docker Registry
-This is a [mirror](https://hub.docker.com/u/tomy0000000) repository collecting my custom docker images.
+# Docker Images
 
-Please read through this main README and the one inside each directory if you were to use any of them.
+The source code for my custom Docker images on [Docker Hub](https://hub.docker.com/u/tomy0000000).
 
-Unless explicitly stated, most images are for **development purpose** only, they're supposed to be quick and dirty, and had some security concerns to some extent. Therefore, do not use them in production environment.
+Use the ansible playbook in [tomy0000000/playbooks](https://github.com/tomy0000000/playbooks/) to setup docker daemon first.
 
 ## Installation
 
