@@ -41,7 +41,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: 🏗️ Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           build-args: "BASE_TAG=${{ inputs.base_tag || 'latest' }}"
           context: Dockerfiles/${{ env.IMAGE_NAME }}
