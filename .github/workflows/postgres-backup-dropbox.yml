@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        postgres:
+        versions:
           ["13.10", "14.7", "15.2", "${{ inputs.base_tag || 'latest' }}"]
     steps:
       - name: 🛒 Checkout
@@ -44,9 +44,9 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           # Manually add the patch version because we're not using it, but it's required to be semver
           tags: |
-            type=raw,value=${{ matrix.postgres }},enable=${{ matrix.postgres == 'latest' }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ matrix.postgres }}.0,enable=${{ matrix.postgres != 'latest' }}
-            type=semver,pattern={{major}},value=${{ matrix.postgres }}.0,enable=${{ matrix.postgres != 'latest' }}
+            type=raw,value=${{ matrix.versions }},enable=${{ matrix.versions == 'latest' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ matrix.versions }}.0,enable=${{ matrix.versions != 'latest' }}
+            type=semver,pattern={{major}},value=${{ matrix.versions }}.0,enable=${{ matrix.versions != 'latest' }}
           flavor: |
             latest=false
           labels: |
@@ -55,7 +55,7 @@ jobs:
             org.opencontainers.image.description=${{ env.DESCRIPTION }}
             org.opencontainers.image.url=${{ github.server_url }}/${{ github.repository }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
             org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
-            org.opencontainers.image.version=${{ matrix.postgres }}
+            org.opencontainers.image.version=${{ matrix.versions }}
 
       - name: 🏗 Build and Push Image
         uses: tomy0000000/actions/build-push-image@main
@@ -64,7 +64,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           context: Dockerfiles/${{ env.IMAGE_NAME }}
-          build_args: BASE_TAG=${{ matrix.postgres }}
+          build_args: BASE_TAG=${{ matrix.versions }}
 
   update-docker-hub-readme:
     name: 📖 Update Docker Hub README
