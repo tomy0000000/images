@@ -5,6 +5,7 @@ on:
     paths:
       - ".github/workflows/postgres-backup-dropbox.yml"
       - "Dockerfiles/postgres-backup-dropbox/**"
+      - "!Dockerfiles/postgres-backup-dropbox/README.md"
     branches:
       - "main"
   schedule:
@@ -23,49 +24,56 @@ env:
 
 jobs:
   build:
-    name: "Build"
+    name: 🏗 Build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        postgres: ["13", "14", "15", "latest"]
+        postgres:
+          ["13.10", "14.7", "15.2", "${{ inputs.base_tag || 'latest' }}"]
     steps:
-      - name: Checkout
+      - name: 🛒 Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Docker Meta
+      - name: ⚙️ Set up Docker Meta
         id: meta
         uses: docker/metadata-action@v4
         with:
           images: |
             ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
             ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          # Manually add the patch version because we're not using it, but it's required to be semver
           tags: |
-            type=raw,value=${{ matrix.postgres }}
+            type=raw,value=${{ matrix.postgres }},enable=${{ matrix.postgres == 'latest' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ matrix.postgres }}.0,enable=${{ matrix.postgres != 'latest' }}
+            type=semver,pattern={{major}},value=${{ matrix.postgres }}.0,enable=${{ matrix.postgres != 'latest' }}
+          flavor: |
+            latest=false
           labels: |
             maintainer=${{ github.repository_owner }}
             org.opencontainers.image.title=${{ env.TITLE }}
             org.opencontainers.image.description=${{ env.DESCRIPTION }}
-            org.opencontainers.image.url=${{ github.repositoryUrl }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
-            org.opencontainers.image.source=${{ github.repositoryUrl }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
+            org.opencontainers.image.url=${{ github.server_url }}/${{ github.repository }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
             org.opencontainers.image.version=${{ matrix.postgres }}
 
-      - name: Build and Push Image
+      - name: 🏗 Build and Push Image
         uses: tomy0000000/actions/build-push-image@main
         with:
           docker_password: ${{ secrets.DOCKER_PASSWORD }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           context: Dockerfiles/${{ env.IMAGE_NAME }}
+          build_args: BASE_TAG=${{ matrix.postgres }}
 
   update-docker-hub-readme:
-    name: "Update Docker Hub README"
+    name: 📖 Update Docker Hub README
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 🛒 Checkout
         uses: actions/checkout@v3
 
-      - name: Update repository description
+      - name: 📖 Update repository description
         uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ github.repository_owner }}
