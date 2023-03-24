@@ -3,6 +3,7 @@ name: "Caddy Cloudflare"
 on:
   push:
     paths:
+      - ".github/workflows/caddy-cloudflare.yml"
       - "Dockerfiles/caddy-cloudflare/**"
       - "!Dockerfiles/caddy-cloudflare/README.md"
     branches:
@@ -13,37 +14,70 @@ on:
     inputs:
       base_tag:
         description: "Upstream caddy tag to build"
-        required: true
         default: "latest"
         type: string
 
 env:
+  TITLE: "Caddy with Cloudflare module"
+  DESCRIPTION: "Caddy with auto certificate management with Cloudflare module"
   IMAGE_NAME: "caddy-cloudflare"
 
 jobs:
   build:
-    name: 🛠 Build
+    name: 🏗 Build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        versions: ["2.6.4", "${{ inputs.base_tag || 'latest' }}"]
+    steps:
+      - name: 🛒 Checkout
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up Docker Meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+            ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          # Manually add the patch version because we're not using it, but it's required to be semver
+          tags: |
+            type=raw,value=${{ matrix.versions }},enable=${{ matrix.versions == 'latest' }}
+            type=semver,pattern={{version}},value=${{ matrix.versions }},enable=${{ matrix.versions != 'latest' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ matrix.versions }},enable=${{ matrix.versions != 'latest' }}
+            type=semver,pattern={{major}},value=${{ matrix.versions }},enable=${{ matrix.versions != 'latest' }}
+          flavor: |
+            latest=false
+          labels: |
+            maintainer=${{ github.repository_owner }}
+            org.opencontainers.image.title=${{ env.TITLE }}
+            org.opencontainers.image.description=${{ env.DESCRIPTION }}
+            org.opencontainers.image.url=${{ github.server_url }}/${{ github.repository }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}/tree/main/Dockerfiles/${{ env.IMAGE_NAME }}
+            org.opencontainers.image.version=${{ matrix.versions }}
+
+      - name: 🏗 Build and Push Image
+        uses: tomy0000000/actions/build-push-image@main
+        with:
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          context: Dockerfiles/${{ env.IMAGE_NAME }}
+          build_args: BASE_TAG=${{ matrix.versions }}
+
+  update-docker-hub-readme:
+    name: 📖 Update Docker Hub README
     runs-on: ubuntu-latest
     steps:
       - name: 🛒 Checkout
         uses: actions/checkout@v3
 
-      - name: ⚙️ Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      - name: ⚙️ Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: 🔑 Login to Docker Hub
-        uses: docker/login-action@v2
+      - name: 📖 Update repository description
+        uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: 🏗️ Build and push
-        uses: docker/build-push-action@v3
-        with:
-          build-args: "BASE_TAG=${{ inputs.base_tag || 'latest' }}"
-          context: Dockerfiles/${{ env.IMAGE_NAME }}
-          push: true
-          tags: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ inputs.base_tag || 'latest' }}
+          repository: ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
+          short-description: ${{ env.DESCRIPTION }}
+          readme-filepath: Dockerfiles/${{ env.IMAGE_NAME }}/README.md
