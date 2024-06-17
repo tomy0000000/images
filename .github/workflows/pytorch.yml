@@ -41,7 +41,7 @@ jobs:
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
       - name: Login to DockerHub
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
@@ -89,7 +89,7 @@ jobs:
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
       - name: Login to DockerHub
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
@@ -133,7 +133,7 @@ jobs:
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
       - name: Login to DockerHub
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
@@ -177,7 +177,7 @@ jobs:
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
       - name: Login to DockerHub
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
@@ -221,7 +221,7 @@ jobs:
       - name: Convert repository name to lowercase
         run: echo "GITHUB_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v3
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
       - name: Login to DockerHub
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
