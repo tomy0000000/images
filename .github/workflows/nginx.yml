@@ -19,7 +19,7 @@ jobs:
     name: Build and push image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Fetch pinned version
         working-directory: Dockerfiles/${{ github.workflow }}
@@ -79,7 +79,7 @@ jobs:
     if: ${{ github.event_name == 'push' && github.event_path == format('Dockerfiles/{0}/README.md', github.workflow) }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Update repository description
         uses: peter-evans/dockerhub-description@v2

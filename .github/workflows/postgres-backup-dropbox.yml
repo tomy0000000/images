@@ -33,7 +33,7 @@ jobs:
           ["13.10", "14.7", "15.2", "${{ inputs.base_tag || 'latest' }}"]
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ⚙️ Set up Docker Meta
         id: meta
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 📖 Update repository description
         uses: peter-evans/dockerhub-description@v3
