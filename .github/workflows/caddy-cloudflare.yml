@@ -36,7 +36,7 @@ jobs:
 
       - name: ⚙️ Set up Docker Meta
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: |
             ${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
